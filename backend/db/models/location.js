@@ -36,13 +36,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE,
-      defaultValue: Sequelize.fn('now')
+      type: DataTypes.DATE,
+      defaultValue: sequelize.fn('now')
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE,
-      defaultValue: Sequelize.fn('now')
+      type: DataTypes.DATE,
+      defaultValue: sequelize.fn('now')
     }
   }, {});
   Location.associate = function(models) {

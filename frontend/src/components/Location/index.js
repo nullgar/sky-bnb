@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+const { User } = require('../../db/models');
+const { Location } = require('../../')
 
-function Location() {
+function oneLocation() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const [credential, setCredential] = useState('');
@@ -28,4 +30,4 @@ function Location() {
   );
 }
 
-export default Location;
+export default oneLocation;

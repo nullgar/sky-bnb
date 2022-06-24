@@ -32,35 +32,39 @@ const validateLogin = [
 //         } else return res.json({});
 //     }
 // );
+router.get('/', asyncHandler(async function(req, res) {
+    const location = await Locations.one(req.params.id);
+    return res.json(location);
+}));
 
 router.get('/:id', asyncHandler(async function(req, res) {
     const location = await Locations.one(req.params.id);
     return res.json(location);
 }));
 
-router.post(
-    '/',
-    validateLogin,
-    asyncHandler(async (req, res, next) => {
-      const { credential, password } = req.body;
+// router.post(
+//     '/',
+//     validateLogin,
+//     asyncHandler(async (req, res, next) => {
+//       const { credential, password } = req.body;
 
-      const user = await User.login({ credential, password });
+//       const user = await User.login({ credential, password });
 
-      if (!user) {
-        const err = new Error('Login failed');
-        err.status = 401;
-        err.title = 'Login failed';
-        err.errors = ['The provided credentials were invalid.'];
-        return next(err);
-      }
+//       if (!user) {
+//         const err = new Error('Login failed');
+//         err.status = 401;
+//         err.title = 'Login failed';
+//         err.errors = ['The provided credentials were invalid.'];
+//         return next(err);
+//       }
 
-      await setTokenCookie(res, user);
+//       await setTokenCookie(res, user);
 
-      return res.json({
-        user
-      });
-    })
-);
+//       return res.json({
+//         user
+//       });
+//     })
+// );
 
 
 router.delete(
