@@ -2,7 +2,8 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Locations } = require('../../db/models');
+
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
@@ -19,19 +20,23 @@ const validateLogin = [
 ];
 
 
-router.get(
-    '/',
-    restoreUser,
-    (req, res) => {
-        const { user } = req;
-        if (user) {
-            return res.json({
-                user: user.toSafeObject()
-            });
-        } else return res.json({});
-    }
-);
+// router.get(
+//     '/:id',
+//     restoreUser,
+//     (req, res) => {
+//         const { user } = req;
+//         if (user) {
+//             return res.json({
+//                 user: user.toSafeObject()
+//             });
+//         } else return res.json({});
+//     }
+// );
 
+router.get('/:id', asyncHandler(async function(req, res) {
+    const location = await Locations.one(req.params.id);
+    return res.json(location);
+}));
 
 router.post(
     '/',
