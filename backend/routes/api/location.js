@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User, Locations } = require('../../db/models');
+const { User, Location } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -33,13 +33,17 @@ const validateLogin = [
 //     }
 // );
 router.get('/', asyncHandler(async function(req, res) {
-    const location = await Locations.one(req.params.id);
-    return res.json(location);
+    const locations = await Location.findAll();
+    return res.json(locations);
 }));
+// router.get('/', asyncHandler(async function(req, res) {
+//     const location = await Locations.one(req.params.id);
+//     return res.json(location);
+// }));
 
 router.get('/:id', asyncHandler(async function(req, res) {
-    const location = await Locations.one(req.params.id);
-    return res.json(location);
+    const locationId = await Location.findByPk(req.params.id);
+    return res.json(locationId);
 }));
 
 // router.post(
