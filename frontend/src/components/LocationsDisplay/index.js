@@ -17,8 +17,8 @@ function LocationsDisplay() {
     dispatch(getLocations())
   }, [dispatch])
 
-    // if(!locations) return null
-    // else {
+    if(!locations) return null
+    else {
 
     return (
         <>
@@ -34,7 +34,7 @@ function LocationsDisplay() {
         ))}
         </>
     );
-    // }
+    }
 }
 
 export default LocationsDisplay;
