@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect, useParams, Link } from 'react-router-dom';
 import { getLocation, getLocations } from '../../store/location';
 
 function LocationsDisplay() {
@@ -23,7 +23,14 @@ function LocationsDisplay() {
     return (
         <>
         {locations.map(location => (
-            <div>{location.name}</div>
+            <div>
+                <h1>
+                    <Link to={`/location/${location.id}`}> {location.name} </Link>
+                </h1>
+                <p>
+                    {location.city}, {location.state}
+                </p>
+            </div>
         ))}
         </>
     );
