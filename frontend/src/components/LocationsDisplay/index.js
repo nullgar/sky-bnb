@@ -23,7 +23,7 @@ function LocationsDisplay() {
     return (
         <>
         {locations.map(location => (
-            <div>
+            <div key={location.id}>
                 <h1>
                     <Link to={`/location/${location.id}`}> {location.name} </Link>
                 </h1>
