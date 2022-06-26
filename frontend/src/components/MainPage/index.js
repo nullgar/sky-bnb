@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import LocationsDisplay from '../LocationsDisplay';
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function MainPage() {
   return (
     <div>
         Main Page
+        <LocationsDisplay />
     </div>
   );
 }
