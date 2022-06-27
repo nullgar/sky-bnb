@@ -30,16 +30,16 @@ router.get(/^\/\d+/, asyncHandler(async function(req, res) {
     const id = req.path.slice(1)
     console.log(id)
     const locationId = await Location.findByPk(parseInt(id));
-
     return res.json(locationId);
 }));
 
 router.post(
     '/',
+
     asyncHandler( async (req, res) => {
         const location = await Location.create(req.body);
-        console.log('hit this -----',req.baseUrl);
-        res.json(`/`)
+            res.json(location)
+        // res.json('hit')
     })
 );
 

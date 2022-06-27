@@ -26,7 +26,7 @@ function Location() {
 
   useEffect(() => {
     dispatch(getLocations())
-  }, [dispatch, location])
+  }, [dispatch])
 
   // useEffect(() => {
   //   dispatch(getLocation(locations, locationId))

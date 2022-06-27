@@ -57,11 +57,12 @@ export const getLocation = (id) => async dispatch => {
 
 export const createLocation = (data) => async dispatch => {
 
-    const res = await csrfFetch(`/api/location/`, {
+    const res = await csrfFetch(`/api/location`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     });
+    //console.log(data)
     if (res.ok) {
         const location = await res.json();
         dispatch(create(location));
@@ -75,31 +76,22 @@ const locationReducer = (state = {}, action) => {
         case GET:
             // action.locations.forEach(location => console.log(location))
             action.locations.forEach(location => {
-            allLocations[location.id] = location;
+            state[location.id] = location;
             });
             return {
-            ...allLocations,
-            ...state
+                ...allLocations,
+                ...state
             };
         case CREATE:
-            console.log('created')
-            // if (!state[action.location.id]) {
-            //     const newState = {
-            //         ...state,
-            //         [action.location.id]: action.location
-            //     };
+            Object.values(action.location).forEach(location => {
+                state[location.id] = location;
+                });
+                return {
+                    ...allLocations,
+                    ...state
+                };
 
-            //     const locationList = newState.allLocations.map(id => newState[id]);
-            //     locationList.push(action.location);
-            //     return newState;
-            // }
-            // return {
-            //     ...state,
-            //     [action.location.id]: {
-            //         ...state[action.location.id],
-            //         ...action.location
-            //     }
-            // }
+
         default:
             return state;
     }
