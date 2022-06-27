@@ -20,62 +20,34 @@ const validateLogin = [
 ];
 
 
-// router.get(
-//     '/:id',
-//     restoreUser,
-//     (req, res) => {
-//         const { user } = req;
-//         if (user) {
-//             return res.json({
-//                 user: user.toSafeObject()
-//             });
-//         } else return res.json({});
-//     }
-// );
 router.get('/', asyncHandler(async function(req, res) {
     const locations = await Location.findAll();
     return res.json(locations);
 }));
-// router.get('/', asyncHandler(async function(req, res) {
-//     const location = await Locations.one(req.params.id);
-//     return res.json(location);
-// }));
 
-router.get('/:id', asyncHandler(async function(req, res) {
-    const locationId = await Location.findByPk(req.params.id);
+
+router.get(/^\/\d+/, asyncHandler(async function(req, res) {
+    const id = req.path.slice(1)
+    console.log(id)
+    const locationId = await Location.findByPk(parseInt(id));
+
     return res.json(locationId);
+    // return res.send(id[1])
 }));
 
 // router.post(
 //     '/',
-//     validateLogin,
-//     asyncHandler(async (req, res, next) => {
-//       const { credential, password } = req.body;
-
-//       const user = await User.login({ credential, password });
-
-//       if (!user) {
-//         const err = new Error('Login failed');
-//         err.status = 401;
-//         err.title = 'Login failed';
-//         err.errors = ['The provided credentials were invalid.'];
-//         return next(err);
-//       }
-
-//       await setTokenCookie(res, user);
-
 //       return res.json({
 //         user
 //       });
 //     })
 // );
 
+// router.post(
+//     '/',
+//
 
-router.delete(
-    '/',
-    (_req, res) => {
-        res.clearCookie('token');
-        return res.json({ message: 'sucess' })
-    }
-);
+
+
+
 module.exports = router;

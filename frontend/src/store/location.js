@@ -38,7 +38,7 @@ const getOne = (locations, locationId) => ({
 //removeLocation
 //createLocation
 export const getLocations = () => async dispatch => {
-    const res = await fetch(`/api/location`);
+    const res = await fetch(`/api/location/`);
     if (res.ok) {
         const locations = await res.json();
         dispatch(get(locations));
