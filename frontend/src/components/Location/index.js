@@ -20,8 +20,8 @@ function Location() {
 
   const destroy = (e) => {
     e.preventDefault()
-    return dispatch(removeLocation(location.id, user))
-
+    dispatch(removeLocation(location.id, user))
+    return history.push("/")
   }
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -34,11 +34,10 @@ function Location() {
   // }
 
   // useEffect(() => {
-  //   dispatch(removeLocation())
+  //   dispatch(removeLocation)
   // }, [dispatch])
   useEffect(() => {
     dispatch(getLocations())
-
   }, [dispatch])
 
   // useEffect(() => {
