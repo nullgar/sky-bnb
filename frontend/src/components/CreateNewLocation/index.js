@@ -8,7 +8,7 @@ function CreateNewLocation() {
     const sessionUser = useSelector(state => state.session.user);
 
     const [cookies, setCookies] = useState('cookie');
-    const [userId, setUserId] = useState(0);
+    // const [userId, setUserId] = useState();
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -24,7 +24,8 @@ function CreateNewLocation() {
 
 
     const formSubmit = async (e) => {
-        setUserId(sessionUser.id)
+        const userId = (parseInt(sessionUser.id))
+
         e.preventDefault();
         const data = {
             userId,
