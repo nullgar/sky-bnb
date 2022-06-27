@@ -21,7 +21,8 @@ function Location() {
   const destroy = (e) => {
     e.preventDefault()
     dispatch(removeLocation(location.id, user))
-    return history.push("/")
+    history.push('/')
+
   }
   // const handleSubmit = (e) => {
   //   e.preventDefault();

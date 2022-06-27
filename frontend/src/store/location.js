@@ -78,12 +78,12 @@ export const removeLocation = (locationId, userId) => async dispatch => {
     })
     console.log(res)
     if(res.ok){
-        console.log('hits remove')
+
       const { id: deletedLocationId } = await res.json();
       dispatch(remove(deletedLocationId, userId))
       return deletedLocationId;
     }
-  }
+}
 
 const locationReducer = (state = {}, action) => {
     const allLocations = {};
@@ -106,13 +106,17 @@ const locationReducer = (state = {}, action) => {
                     ...state
                 };
         case REMOVE:
-            Object.values(action.location).forEach(location => {
-                state[location.id] = location;
-                });
-                return {
-                    ...allLocations,
-                    ...state
-                };
+            const newState = {...state}
+            delete newState[action.locationId]
+            console.log(newState)
+            return newState;
+            // Object.values(action.location).forEach(location => {
+            //     state[location.id] = location;
+            //     });
+            //     return {
+            //         ...allLocations,
+            //         ...state
+            //     };
 
 
 
