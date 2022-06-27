@@ -40,7 +40,6 @@ function CreateNewLocation() {
 
         let newLocation;
         newLocation = await dispatch(createLocation(data));
-        console.log('here -----------------',newLocation)
         history.push(`location/${newLocation}`)
     };
 

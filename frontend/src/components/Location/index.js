@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useParams } from 'react-router-dom';
-import { getLocation, getLocations } from '../../store/location';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { getLocation, getLocations, removeLocation } from '../../store/location';
+
 
 function Location() {
   const { locationId } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const location = useSelector(state => {
     return state.location[locationId]
   });
+  const user = useSelector(state => {
+    return state.session.user.id
+  })
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
+  const destroy = (e) => {
+    e.preventDefault()
+    return dispatch(removeLocation(location.id, user))
 
+  }
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   setErrors([]);
@@ -24,8 +33,12 @@ function Location() {
   //     });
   // }
 
+  // useEffect(() => {
+  //   dispatch(removeLocation())
+  // }, [dispatch])
   useEffect(() => {
     dispatch(getLocations())
+
   }, [dispatch])
 
   // useEffect(() => {
@@ -35,7 +48,7 @@ function Location() {
 
 
 
-    if(!location) return null
+    if (!location) return null
     else {
 
     return (
@@ -45,6 +58,7 @@ function Location() {
         <p>{location.city}, {location.state}, {location.country}</p>
 
         <p>Cost per night ${location.price}</p>
+        {location.userId === user ? <button onClick={destroy}>delete</button> : null}
       </div>
     );
     }

@@ -4,7 +4,7 @@ const GET = 'location/GET';
 const GETONE = 'location/GETONE';
 const CREATE = 'location/CREATE';
 // const UPDATE = 'location/UPDATE';
-// const REMOVE = 'location/REMOVE';
+const REMOVE = 'location/REMOVE';
 
 const get = (locations) => ({
     type: GET,
@@ -22,16 +22,17 @@ const create = (location) => ({
     location
 });
 
+
 // const update = (location) => ({
 //     type: UPDATE,
 //     location
 // });
 
-// const remove = (locationId, userId) => ({
-//     type: REMOVE,
-//     locationId,
-//     userId
-// });
+const remove = (locationId, userId) => ({
+    type: REMOVE,
+    locationId,
+    userId
+});
 
 
 
@@ -70,6 +71,20 @@ export const createLocation = (data) => async dispatch => {
     }
 };
 
+export const removeLocation = (locationId, userId) => async dispatch => {
+    // console.log('data', data)
+    const res = await csrfFetch(`/api/location/${locationId}`, {
+      method: 'DELETE'
+    })
+    console.log(res)
+    if(res.ok){
+        console.log('hits remove')
+      const { id: deletedLocationId } = await res.json();
+      dispatch(remove(deletedLocationId, userId))
+      return deletedLocationId;
+    }
+  }
+
 const locationReducer = (state = {}, action) => {
     const allLocations = {};
     switch (action.type) {
@@ -90,6 +105,15 @@ const locationReducer = (state = {}, action) => {
                     ...allLocations,
                     ...state
                 };
+        case REMOVE:
+            Object.values(action.location).forEach(location => {
+                state[location.id] = location;
+                });
+                return {
+                    ...allLocations,
+                    ...state
+                };
+
 
 
         default:
