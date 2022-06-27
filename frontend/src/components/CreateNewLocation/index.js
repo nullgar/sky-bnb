@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useValue } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocations } from '../../store/location';
+import { getLocations, createLocation } from '../../store/location';
 
 function CreateNewLocation() {
 
     //const newLocation = useSelector(state => state.location)
+    const sessionUser = useSelector(state => state.session.user);
 
     const [cookies, setCookies] = useState('cookie');
-    const [userId, setUserId] = useState('userId');
+    const [userId, setUserId] = useState(0);
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -23,8 +24,10 @@ function CreateNewLocation() {
 
 
     const formSubmit = async (e) => {
+        setUserId(sessionUser.id)
         e.preventDefault();
         const data = {
+            userId,
             name,
             address,
             city,
@@ -33,16 +36,16 @@ function CreateNewLocation() {
             price
         }
 
-        console.log(data)
+        let newLocation;
+        newLocation = await dispatch(createLocation(data));
     };
 
     return (
         <div>
             <h1>Create a new location</h1>
             <form onSubmit={formSubmit}>
-                <input type='hidden' placeholder='cookies'></input>
-                <input type='hidden' placeholder='userId'></input>
 
+                {/* <input type='hidden' value={userId} /> */}
                 <label>Name: </label>
                 <input type='text' name='name' onChange={(e) => setName(e.target.value)} value={name}></input>
 

@@ -2,9 +2,9 @@ import { csrfFetch } from "./csrf";
 
 const GET = 'location/GET';
 const GETONE = 'location/GETONE';
+const CREATE = 'location/CREATE';
 // const UPDATE = 'location/UPDATE';
 // const REMOVE = 'location/REMOVE';
-// const CREATE = 'location/CREATE';
 
 const get = (locations) => ({
     type: GET,
@@ -15,6 +15,11 @@ const getOne = (locations, locationId) => ({
     type: GETONE,
     locations,
     locationId
+});
+
+const create = (location) => ({
+    type: CREATE,
+    location
 });
 
 // const update = (location) => ({
@@ -28,15 +33,10 @@ const getOne = (locations, locationId) => ({
 //     userId
 // });
 
-// const create = (location) => ({
-//     type: CREATE,
-//     location
-// });
 
 
 // updateLocation
 //removeLocation
-//createLocation
 export const getLocations = () => async dispatch => {
     const res = await fetch(`/api/location/`);
     if (res.ok) {
@@ -55,6 +55,20 @@ export const getLocation = (id) => async dispatch => {
     }
 };
 
+export const createLocation = (data) => async dispatch => {
+
+    const res = await csrfFetch(`/api/location/`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+    if (res.ok) {
+        const location = await res.json();
+        dispatch(create(location));
+        return location;
+    }
+};
+
 const locationReducer = (state = {}, action) => {
     const allLocations = {};
     switch (action.type) {
@@ -67,8 +81,25 @@ const locationReducer = (state = {}, action) => {
             ...allLocations,
             ...state
             };
-        // case GETONE:
-        //     action.locations
+        case CREATE:
+            console.log('created')
+            // if (!state[action.location.id]) {
+            //     const newState = {
+            //         ...state,
+            //         [action.location.id]: action.location
+            //     };
+
+            //     const locationList = newState.allLocations.map(id => newState[id]);
+            //     locationList.push(action.location);
+            //     return newState;
+            // }
+            // return {
+            //     ...state,
+            //     [action.location.id]: {
+            //         ...state[action.location.id],
+            //         ...action.location
+            //     }
+            // }
         default:
             return state;
     }
