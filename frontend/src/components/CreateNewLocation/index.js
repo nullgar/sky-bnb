@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useValue } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getLocations, createLocation } from '../../store/location';
 
 function CreateNewLocation() {
 
     //const newLocation = useSelector(state => state.location)
     const sessionUser = useSelector(state => state.session.user);
-
+    const history = useHistory();
     const [cookies, setCookies] = useState('cookie');
     // const [userId, setUserId] = useState();
     const [name, setName] = useState('');
@@ -39,6 +40,8 @@ function CreateNewLocation() {
 
         let newLocation;
         newLocation = await dispatch(createLocation(data));
+        console.log('here -----------------',newLocation)
+        history.push(`location/${newLocation}`)
     };
 
     return (

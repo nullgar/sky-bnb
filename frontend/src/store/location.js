@@ -83,7 +83,7 @@ const locationReducer = (state = {}, action) => {
                 ...state
             };
         case CREATE:
-            Object.values(action.locations).forEach(location => {
+            Object.values(action.location).forEach(location => {
                 state[location.id] = location;
                 });
                 return {
