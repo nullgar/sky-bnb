@@ -31,7 +31,7 @@ function Location() {
   const editRedirect = (e) => {
     e.preventDefault();
     console.log('edit clicked', location.id);
-    history.push(`/edit-location/${location.id}`)
+    history.push({pathname: `/edit-location/${location.id}` , state: {location}})
   }
   // const handleSubmit = (e) => {
   //   e.preventDefault();
