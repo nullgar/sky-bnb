@@ -20,16 +20,16 @@ function Navigation({ isLoaded }){
       </>
     );
   }
+    return (
+      <ul>
+        <li>
+          <NavLink exact to="/">Home</NavLink>
+          {isLoaded && sessionLinks}
+        </li>
+      </ul>
+    );
+  }
 
-  return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        <NavLink to ='/new-location'>Create New Location</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
-  );
-}
+
 
 export default Navigation;

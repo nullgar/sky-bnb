@@ -11,9 +11,11 @@ function Location() {
   const location = useSelector(state => {
     return state.location[locationId]
   });
+
   const user = useSelector(state => {
-    return state.session.user.id
+    return state.session.user
   })
+
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
@@ -22,7 +24,6 @@ function Location() {
     e.preventDefault()
     dispatch(removeLocation(location.id, user))
     history.push('/')
-
   }
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -48,19 +49,17 @@ function Location() {
 
 
 
-    if (!location) return null
-    else {
-
-    return (
+    if (!location) {
+      return null
+    } else {
+      return(
       <div>
         <h1>{location.name}</h1>
         <p>Located at {location.address}</p>
         <p>{location.city}, {location.state}, {location.country}</p>
-
         <p>Cost per night ${location.price}</p>
-        {location.userId === user ? <button onClick={destroy}>delete</button> : null}
       </div>
-    );
+      )
     }
 }
 
