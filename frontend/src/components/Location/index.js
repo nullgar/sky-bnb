@@ -22,7 +22,7 @@ function Location() {
 
   const destroy = (e) => {
     e.preventDefault()
-    dispatch(removeLocation(location.id, user))
+    dispatch(removeLocation(location.id, user.id))
     history.push('/')
   }
   // const handleSubmit = (e) => {
@@ -58,7 +58,8 @@ function Location() {
         <p>Located at {location.address}</p>
         <p>{location.city}, {location.state}, {location.country}</p>
         <p>Cost per night ${location.price}</p>
-        {location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
+        {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
+
       </div>
       )
     }
