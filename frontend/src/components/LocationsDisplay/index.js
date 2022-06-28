@@ -39,6 +39,7 @@ function LocationsDisplay() {
         {user !== undefined && user !== null ? <Link to='/new-location'>Create New Location</Link> : null}
         {locations.map(location => (
             <div key={location.id}>
+
                 <h1>
                     <Link to={`/location/${location.id}`}> {location.name} </Link>
                 </h1>

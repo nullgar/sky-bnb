@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET = 'location/GET';
 const GETONE = 'location/GETONE';
 const CREATE = 'location/CREATE';
-// const UPDATE = 'location/UPDATE';
+const UPDATE = 'location/UPDATE';
 const REMOVE = 'location/REMOVE';
 
 const get = (locations) => ({
@@ -23,10 +23,10 @@ const create = (location) => ({
 });
 
 
-// const update = (location) => ({
-//     type: UPDATE,
-//     location
-// });
+const update = (location) => ({
+    type: UPDATE,
+    location
+});
 
 const remove = (locationId, userId) => ({
     type: REMOVE,
@@ -36,7 +36,7 @@ const remove = (locationId, userId) => ({
 
 
 
-// updateLocation
+
 //removeLocation
 export const getLocations = () => async dispatch => {
     const res = await fetch(`/api/location/`);
@@ -71,12 +71,26 @@ export const createLocation = (data) => async dispatch => {
     }
 };
 
+export const updateLocation = (data, locationId) => async dispatch => {
+
+    const res = await csrfFetch(`/api/location/${locationId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+        const updatedLocation  = await res.json();
+        dispatch(update(updatedLocation));
+        return;
+    }
+}
+
 export const removeLocation = (locationId, userId) => async dispatch => {
     // console.log('data', data)
     const res = await csrfFetch(`/api/location/${locationId}`, {
       method: 'DELETE'
     })
-    console.log(res)
     if(res.ok){
 
       const { id: deletedLocationId } = await res.json();
@@ -108,15 +122,14 @@ const locationReducer = (state = {}, action) => {
         case REMOVE:
             const newState = {...state}
             delete newState[action.locationId]
-            console.log(newState)
+
             return newState;
-            // Object.values(action.location).forEach(location => {
-            //     state[location.id] = location;
-            //     });
-            //     return {
-            //         ...allLocations,
-            //         ...state
-            //     };
+        case UPDATE:
+            return {
+                    ...allLocations,
+                    ...state
+
+                };
 
 
 
