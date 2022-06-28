@@ -2,9 +2,9 @@ import { csrfFetch } from "./csrf";
 
 const GET = 'location/GET';
 const GETONE = 'location/GETONE';
+const CREATE = 'location/CREATE';
 // const UPDATE = 'location/UPDATE';
-// const REMOVE = 'location/REMOVE';
-// const CREATE = 'location/CREATE';
+const REMOVE = 'location/REMOVE';
 
 const get = (locations) => ({
     type: GET,
@@ -17,28 +17,29 @@ const getOne = (locations, locationId) => ({
     locationId
 });
 
+const create = (location) => ({
+    type: CREATE,
+    location
+});
+
+
 // const update = (location) => ({
 //     type: UPDATE,
 //     location
 // });
 
-// const remove = (locationId, userId) => ({
-//     type: REMOVE,
-//     locationId,
-//     userId
-// });
+const remove = (locationId, userId) => ({
+    type: REMOVE,
+    locationId,
+    userId
+});
 
-// const create = (location) => ({
-//     type: CREATE,
-//     location
-// });
 
 
 // updateLocation
 //removeLocation
-//createLocation
 export const getLocations = () => async dispatch => {
-    const res = await fetch(`/api/location`);
+    const res = await fetch(`/api/location/`);
     if (res.ok) {
         const locations = await res.json();
         dispatch(get(locations));
@@ -55,20 +56,70 @@ export const getLocation = (id) => async dispatch => {
     }
 };
 
+export const createLocation = (data) => async dispatch => {
+
+    const res = await csrfFetch(`/api/location`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+    //console.log(data)
+    if (res.ok) {
+        const location = await res.json();
+        dispatch(create(location));
+        return location;
+    }
+};
+
+export const removeLocation = (locationId, userId) => async dispatch => {
+    // console.log('data', data)
+    const res = await csrfFetch(`/api/location/${locationId}`, {
+      method: 'DELETE'
+    })
+    console.log(res)
+    if(res.ok){
+
+      const { id: deletedLocationId } = await res.json();
+      dispatch(remove(deletedLocationId, userId))
+      return deletedLocationId;
+    }
+}
+
 const locationReducer = (state = {}, action) => {
     const allLocations = {};
     switch (action.type) {
         case GET:
             // action.locations.forEach(location => console.log(location))
             action.locations.forEach(location => {
-            allLocations[location.id] = location;
+            state[location.id] = location;
             });
             return {
-            ...allLocations,
-            ...state
+                ...allLocations,
+                ...state
             };
-        // case GETONE:
-        //     action.locations
+        case CREATE:
+            Object.values(action.location).forEach(location => {
+                state[location.id] = location;
+                });
+                return {
+                    ...allLocations,
+                    ...state
+                };
+        case REMOVE:
+            const newState = {...state}
+            delete newState[action.locationId]
+            console.log(newState)
+            return newState;
+            // Object.values(action.location).forEach(location => {
+            //     state[location.id] = location;
+            //     });
+            //     return {
+            //         ...allLocations,
+            //         ...state
+            //     };
+
+
+
         default:
             return state;
     }

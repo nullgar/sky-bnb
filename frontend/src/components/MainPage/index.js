@@ -3,7 +3,6 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import LocationsDisplay from '../LocationsDisplay';
-
 function MainPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);

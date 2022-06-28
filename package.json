@@ -22,5 +22,6 @@
   "bugs": {
     "url": "https://github.com/nullgar/sky-bnb/issues"
   },
-  "homepage": "https://github.com/nullgar/sky-bnb#readme"
+  "homepage": "https://github.com/nullgar/sky-bnb#readme",
+  "proxy": "http://localhost:8080"
 }
