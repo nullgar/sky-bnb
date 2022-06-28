@@ -58,6 +58,7 @@ function Location() {
         <p>Located at {location.address}</p>
         <p>{location.city}, {location.state}, {location.country}</p>
         <p>Cost per night ${location.price}</p>
+        {location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
       </div>
       )
     }
