@@ -12,7 +12,7 @@ function Location() {
     return state.location[locationId]
   });
   const user = useSelector(state => {
-    return state.session.user.id
+    return state.session.user
   })
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ function Location() {
 
   const destroy = (e) => {
     e.preventDefault()
-    dispatch(removeLocation(location.id, user))
+    dispatch(removeLocation(location.id, user.id))
     history.push('/')
 
   }
@@ -58,7 +58,7 @@ function Location() {
         <p>{location.city}, {location.state}, {location.country}</p>
 
         <p>Cost per night ${location.price}</p>
-        {location.userId === user ? <button onClick={destroy}>delete</button> : null}
+        {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
       </div>
     );
     }
