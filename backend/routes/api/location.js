@@ -42,6 +42,18 @@ router.post(
     })
 );
 
+router.put(
+    '/:id',
+
+    asyncHandler( async (req, res) => {
+        const id = req.params.id;
+        const location = req.body
+        const updatedLocation = await Location.update(location , { where: { id: id } })
+
+        res.json(location)
+    })
+)
+
 router.delete("/:id", asyncHandler(async function (req, res) {
     const id = await Location.findByPk(req.params.id);
     await id.destroy();

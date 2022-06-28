@@ -23,7 +23,6 @@ function CreateNewLocation() {
     // }, [dispatch])
 
 
-
     const formSubmit = async (e) => {
         const userId = (parseInt(sessionUser.id))
 
@@ -40,9 +39,9 @@ function CreateNewLocation() {
 
         let newLocation;
         newLocation = await dispatch(createLocation(data));
-        history.push(`location/${newLocation}`)
+        history.push(`/`)
     };
-
+    if (!sessionUser) return <h1>Not Allowed</h1>
     return (
         <div>
             <h1>Create a new location</h1>

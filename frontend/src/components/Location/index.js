@@ -12,17 +12,26 @@ function Location() {
     return state.location[locationId]
   });
   const user = useSelector(state => {
-    return state.session.user.id
+    return state.session.user
   })
+
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
+  useEffect(() => {
+    dispatch(getLocations())
+  }, [dispatch])
+
   const destroy = (e) => {
     e.preventDefault()
-    dispatch(removeLocation(location.id, user))
+    dispatch(removeLocation(location.id, user.id))
     history.push('/')
-
+  };
+  const editRedirect = (e) => {
+    e.preventDefault();
+    console.log('edit clicked', location.id);
+    history.push({pathname: `/edit-location/${location.id}` , state: {location}})
   }
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -37,30 +46,26 @@ function Location() {
   // useEffect(() => {
   //   dispatch(removeLocation)
   // }, [dispatch])
-  useEffect(() => {
-    dispatch(getLocations())
-  }, [dispatch])
-
-  // useEffect(() => {
-  //   dispatch(getLocation(locations, locationId))
-  // }, [locationId, dispatch])
 
 
 
 
-    if (!location) return null
-    else {
 
-    return (
+
+    if (!location) {
+      return null
+    } else {
+      return(
       <div>
         <h1>{location.name}</h1>
         <p>Located at {location.address}</p>
         <p>{location.city}, {location.state}, {location.country}</p>
-
         <p>Cost per night ${location.price}</p>
-        {location.userId === user ? <button onClick={destroy}>delete</button> : null}
+        {user && location.userId === user.id ? <button onClick={editRedirect}>edit</button>   : null}
+        {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
+
       </div>
-    );
+      )
     }
 }
 

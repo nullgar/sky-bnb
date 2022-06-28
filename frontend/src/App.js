@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import * as locationActions from "./store/location";
 import Navigation from "./components/Navigation";
 import CreateNewLocation from "./components/CreateNewLocation";
+import EditLocation from "./components/EditLocation";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/new-location/">
             <CreateNewLocation />
+          </Route>
+          <Route path="/edit-location/:locationId">
+            <EditLocation />
           </Route>
           <Route path="/login">
             <LoginFormPage />
