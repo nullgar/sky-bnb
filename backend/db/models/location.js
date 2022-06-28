@@ -48,8 +48,8 @@ module.exports = (sequelize, DataTypes) => {
   Location.associate = function(models) {
     // associations can be defined here
     Location.belongsTo(models.User, { foreignKey: 'userId' });
-    Location.hasMany(models.Review, { foreignKey: 'locationId'})
     Location.hasMany(models.Image, { foreignKey: 'locationId'})
+    Location.hasMany(models.Review, { foreignKey: 'locationId'})
   };
   return Location;
 };

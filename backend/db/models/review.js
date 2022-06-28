@@ -2,10 +2,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Reviews = sequelize.define('Review', {
     locationId: {
-      type: DataTypes.INTEGER,
       allowNull: false,
+      type: DataTypes.INTEGER,
       references: {
-        model: 'Location',
+        model: 'Locations',
         key: 'id'
       }
     },

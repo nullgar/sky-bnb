@@ -2,9 +2,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Images = sequelize.define('Image', {
     locationId: {
+      allowNull: false,
       type: DataTypes.INTEGER,
       references: {
-        model: 'Location',
+        model: 'Locations',
         key: 'id'
       }
     },
@@ -25,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Images.associate = function(models) {
     // associations can be defined here
-    Images.belongsTo(models.Location, { foreignKey: 'locationId'});
+    Images.belongTo(models.Location, { foreignKey: 'locationId'});
   };
   return Images;
 };
