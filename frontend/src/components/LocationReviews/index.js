@@ -19,16 +19,20 @@ const LocationReviews = () => {
         dispatch(getReviews( locationId ))
     }, [dispatch]);
 
+    const reviewDelete = () => {
+        console.log('delete click')
+    }
 
     if (reviews) {
     return (
         <div>
             Reviews Go Here
-            {reviews.map(review => {
-               return <p key={review.id}>{review.review}</p>
-
-                // console.log(review, sessionUser.id)
-            })}
+            {reviews.map(review => (
+                <div key={review.id}>
+                    <p>{review.review}</p>
+                    {review.userId === sessionUser.id ? <button onClick={reviewDelete}>delete</button> : null}
+                </div>
+            ))}
             <CreateNewReview />
         </div>
     )

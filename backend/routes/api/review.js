@@ -22,5 +22,11 @@ router.post('/', asyncHandler(async function(req, res) {
     return res.json(review);
 }));
 
+router.delete('/:locationId', asyncHandler(async function(req, res) {
+    const {locationId} = req.params;
+    const id = parseInt(locationId);
+    return res.json('delete')
+}))
+
 
 module.exports = router;
