@@ -14,6 +14,7 @@ const LocationReviews = () => {
     });
 
     const sessionUser = useSelector(state => state.session.user);
+
     useEffect(() => {
         dispatch(getReviews())
     }, [dispatch]);

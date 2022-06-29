@@ -71,7 +71,7 @@ const EditLocation = ({hideForm}) => {
         let addressField = document.querySelector('#locationDisplayAddress');
         addressField.innerHTML = address
         let cityField = document.querySelector('#locationDisplayCity');
-        cityField.innerHTML = city
+        cityField.innerHTML = `${city}, ${state}, ${country}`
         let costField = document.querySelector('#locationDisplayCost');
         costField.innerHTML = price
 
@@ -80,7 +80,7 @@ const EditLocation = ({hideForm}) => {
         // history.push(`/location/${locationId}`)
     };
 
-    console.log(location)
+
     if (!user || !sessionUser) {
         return <h1>Not Allowed</h1>
     } else if (Object.values(location)) {

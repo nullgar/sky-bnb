@@ -15,8 +15,9 @@ router.get('/', asyncHandler(async function(req, res) {
 }));
 
 router.post('/', asyncHandler(async function(req, res) {
-    const images = await Review.create(req.body);
-    return res.json(images);
+    const review = await Review.create(req.body);
+
+    return res.json(review);
 }));
 
 

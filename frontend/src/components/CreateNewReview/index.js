@@ -16,6 +16,7 @@ const CreateNewReview = () => {
 
     const [review, setReview] = useState('');
     const [rating, setRating] = useState(0);
+
     const submitReview = async (e) => {
         const userId = (parseInt(sessionUser.id));
         e.preventDefault();
@@ -31,9 +32,10 @@ const CreateNewReview = () => {
         newReview = await dispatch(createReview(data))
 
     }
-    useEffect(() => {
-        dispatch(getReviews())
-    }, [dispatch, review]);
+    // useEffect(() => {
+    //   dispatch(getReviews())
+
+    // }, [review]);
 
     return (
         <form>

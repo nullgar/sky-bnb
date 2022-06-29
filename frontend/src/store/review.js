@@ -9,9 +9,9 @@ const get = (reviews) => ({
     type: GET,
     reviews
 });
-const create = (reviews) => ({
+const create = (review) => ({
     type: CREATE,
-    reviews
+    review
 });
 
 
@@ -35,30 +35,41 @@ export const createReview = (data) =>async dispatch => {
 
     if (res.ok) {
         const review = await res.json();
-        dispatch(create(data));
+        dispatch(create(review));
         return review;
     }
 }
 
-const reviewReducer = (state = {}, action) => {
+const reviewReducer = (state = [], action) => {
     const allReviews = {};
     switch (action.type) {
         case GET:
             action.reviews.forEach(review => {
-                state[review.id] = review;
+                allReviews[review.id] = review;
+
             });
             return {
-                ...allReviews,
-                ...state
+                ...allReviews
             }
-        case CREATE:
-            Object.values(action.reviews).forEach(review => {
-                state[review.id] = review;
-            });
-            return {
-                ...allReviews,
-                ...state
-            }
+            case CREATE:
+                console.log(action.review)
+                if (!state[action.review.id]) {
+                    const newState = {
+                        ...state,
+                        [action.review.id]: action.review
+                    };
+                    return newState
+                }
+                return {
+                    ...state,
+                    [action.review.id]: {
+                        ...state[action.review.id],
+                        ...action.review
+                    }
+                };
+
+
+
         default:
             return state;
     }

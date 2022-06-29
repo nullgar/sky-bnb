@@ -38,7 +38,7 @@ function Location({hideForm}) {
     // history.push({pathname: `/location/${location.id}/edit` , state: {location}})
     let hide = document.querySelector('#hideEditLocation');
 
-    console.log(hide)
+
 
     if (hide = document.querySelector('.hideEditLocation')) {
       let button = document.querySelector('#locationEditButton');
@@ -48,9 +48,8 @@ function Location({hideForm}) {
     } else {
       let hide = document.querySelector('#hideEditLocation');
       hide.className = 'hideEditLocation'
-      console.log(hide)
+
       let button = document.querySelector('#locationEditButton');
-      // console.log(button)
       button.innerHTML = 'Edit'
     }
   }
@@ -81,7 +80,7 @@ function Location({hideForm}) {
       <div>
         <h1 id='locationDisplayName'>{location.name}</h1>
         <p id='locationDisplayAddress'>Located at {location.address}</p>
-        <p id='locationDisplayCity'>{location.city}, <p>{location.state}</p>, <p>{location.country}</p></p>
+        <p id='locationDisplayCity'>{location.city}, {location.state}, {location.country}</p>
         <p id='locationDisplayCost'>Cost per night ${location.price}</p>
         {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton'>Edit</button>   : null}
         {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
