@@ -9,10 +9,12 @@ const LocationReviews = () => {
     const dispatch = useDispatch();
     const { locationId } = useParams();
     const reviews = useSelector(state => {
-        return state.review[locationId];
+        return Object.values(state.review);
     });
-
-
+    console.log(locationId)
+   reviews.map(review=> {
+        if (review.locationId === parseInt(locationId)) console.log(review.review)
+    })
     useEffect(() => {
         dispatch(getReviews())
     }, [dispatch]);
@@ -27,9 +29,9 @@ const LocationReviews = () => {
     return (
         <div>
             Reviews Go Here
-            {/* {reviews(review => (
-                <p key={review.id}>{review.review}</p>
-            ))} */}
+            {reviews.map(review => {
+                if (review.locationId === parseInt(locationId)) return <p key={review.id}>{review.review}</p>
+        })}
             <button onClick={pingReviews}>Ping</button>
         </div>
     )
