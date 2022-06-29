@@ -9,8 +9,10 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 
-router.get('/', asyncHandler(async function(req, res) {
-    const review = await Review.findAll();
+router.get('/:locationId', asyncHandler(async function(req, res) {
+    const {locationId} = req.params;
+    const id = parseInt(locationId);
+    const review = await Review.findAll({where: { id: locationId }});
     return res.json(review);
 }));
 

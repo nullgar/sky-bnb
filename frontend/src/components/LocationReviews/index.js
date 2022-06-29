@@ -16,7 +16,7 @@ const LocationReviews = () => {
     const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
-        dispatch(getReviews())
+        dispatch(getReviews( locationId ))
     }, [dispatch]);
 
 
@@ -25,7 +25,9 @@ const LocationReviews = () => {
         <div>
             Reviews Go Here
             {reviews.map(review => {
-                if (review.locationId === parseInt(locationId)) return <p key={review.id}>{review.review}</p>
+               return <p key={review.id}>{review.review}</p>
+
+                // console.log(review, sessionUser.id)
             })}
             <CreateNewReview />
         </div>

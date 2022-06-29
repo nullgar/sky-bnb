@@ -2,25 +2,31 @@ import { csrfFetch } from "./csrf";
 
 const GET = 'review/GET';
 const CREATE = 'review/CREATE';
-const DELETE = 'review/DELETE';
+const REMOVE = 'review/REMOVE';
 
-
-const get = (reviews) => ({
+const getLocationReviews = (reviews) => ({
     type: GET,
     reviews
 });
+
 const create = (review) => ({
     type: CREATE,
     review
 });
 
+const remove = (locationId, userId) => ({
+    type: REMOVE,
+    locationId,
+    userId
+});
 
-export const getReviews = () => async dispatch => {
-    const res = await fetch(`/api/reviews/`);
+export const getReviews = (locationId) => async dispatch => {
+    const res = await fetch(`/api/reviews/${locationId}`);
 
     if (res.ok) {
         const reviews = await res.json();
-        dispatch(get(reviews));
+        // console.log('this is it---- ', reviews)
+        dispatch(getLocationReviews(reviews));
         return reviews;
     }
 };
@@ -38,6 +44,10 @@ export const createReview = (data) =>async dispatch => {
         dispatch(create(review));
         return review;
     }
+};
+
+export const removeReview = (locationId, userId) => async dispatch => {
+    console.log(locationId, userId)
 }
 
 const reviewReducer = (state = [], action) => {
@@ -67,9 +77,11 @@ const reviewReducer = (state = [], action) => {
                         ...action.review
                     }
                 };
+            case REMOVE:
+                const newState = {...state}
+                delete newState[action.locationId]
 
-
-
+                return newState;
         default:
             return state;
     }
