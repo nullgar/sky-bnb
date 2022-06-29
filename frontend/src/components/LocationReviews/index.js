@@ -23,7 +23,9 @@ const LocationReviews = () => {
         console.log('delete click')
     }
 
-    if (reviews) {
+    if (reviews && sessionUser) {
+
+
     return (
         <div>
             Reviews Go Here
@@ -36,7 +38,19 @@ const LocationReviews = () => {
             <CreateNewReview />
         </div>
     )
-    } else {<h1>wait</h1>}
+
+    } else {
+        return (
+            <div>
+            Reviews Go Here
+            {reviews.map(review => (
+                <div key={review.id}>
+                    <p>{review.review}</p>
+                </div>
+            ))}
+        </div>
+        )
+    }
 }
 
 export default LocationReviews;
