@@ -37,7 +37,9 @@ function Location({hideForm}) {
     // console.log('edit clicked', location.id);
     // history.push({pathname: `/location/${location.id}/edit` , state: {location}})
     let hide = document.querySelector('#hideEditLocation');
-    // hideForm(false)
+
+    console.log(hide)
+
     if (hide = document.querySelector('.hideEditLocation')) {
       let button = document.querySelector('#locationEditButton');
       button.innerHTML = 'Cancel Edit'
@@ -45,10 +47,10 @@ function Location({hideForm}) {
 
     } else {
       let hide = document.querySelector('#hideEditLocation');
-      console.log(hide)
       hide.className = 'hideEditLocation'
+      console.log(hide)
       let button = document.querySelector('#locationEditButton');
-      console.log(button)
+      // console.log(button)
       button.innerHTML = 'Edit'
     }
   }

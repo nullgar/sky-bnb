@@ -32,9 +32,9 @@ function App() {
           <Route path="/location/new">
             <CreateNewLocation />
           </Route>
-          <Route path="/location/:locationId/edit">
+          {/* <Route path="/location/:locationId/edit">
             <EditLocation />
-          </Route>
+          </Route> */}
           <Route exact path="/location/:locationId">
             <Location hideForm={() => Location(false)}/>
           </Route>

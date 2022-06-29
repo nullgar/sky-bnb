@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { getReviews } from '../../store/review';
 
 
 
 const LocationReviews = () => {
     const dispatch = useDispatch();
-
+    const { locationId } = useParams();
     const reviews = useSelector(state => {
-        return Object.values(state.review);
+        return state.review[locationId];
     });
 
-    console.log(reviews)
+
     useEffect(() => {
         dispatch(getReviews())
     }, [dispatch]);
@@ -22,15 +23,17 @@ const LocationReviews = () => {
 
         console.log('click')
     }
+    if (reviews) {
     return (
         <div>
             Reviews Go Here
-            {reviews.map(review => (
-                <p>{review.review}</p>
-            ))}
+            {/* {reviews(review => (
+                <p key={review.id}>{review.review}</p>
+            ))} */}
             <button onClick={pingReviews}>Ping</button>
         </div>
     )
+    } else {<h1>wait</h1>}
 }
 
 export default LocationReviews;

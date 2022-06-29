@@ -60,6 +60,7 @@ const EditLocation = ({hideForm}) => {
         let updatedLocation;
         updatedLocation = await dispatch(updateLocation(data, location.id));
         let hide = document.querySelector('#hideEditLocation');
+
         hide.className = 'hideEditLocation'
         let button = document.querySelector('#locationEditButton');
 
@@ -69,10 +70,10 @@ const EditLocation = ({hideForm}) => {
         // history.push(`/location/${locationId}`)
     };
 
-
+    console.log(location)
     if (!user || !sessionUser) {
         return <h1>Not Allowed</h1>
-    } else if (location.name !== '') {
+    } else if (Object.values(location)) {
         return (
         <div className='hideEditLocation' id='hideEditLocation'>
         <form>
