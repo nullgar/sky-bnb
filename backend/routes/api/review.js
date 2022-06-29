@@ -10,8 +10,8 @@ const router = express.Router();
 
 
 router.get('/', asyncHandler(async function(req, res) {
-    const images = await re.findAll();
-    return res.json(locations);
+    const images = await Review.findAll();
+    return res.json(images);
 }));
 
 
