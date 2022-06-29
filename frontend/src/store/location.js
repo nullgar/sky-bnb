@@ -37,7 +37,7 @@ const remove = (locationId, userId) => ({
 
 
 
-//removeLocation
+
 export const getLocations = () => async dispatch => {
     const res = await fetch(`/api/location/`);
     if (res.ok) {

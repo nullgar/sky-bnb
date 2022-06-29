@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { getLocation, getLocations, removeLocation } from '../../store/location';
 import EditLocation from '../EditLocation';
+import LocationReviews from '../LocationReviews';
 
 
 function Location({hideForm}) {
@@ -83,6 +84,7 @@ function Location({hideForm}) {
         {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton'>Edit</button>   : null}
         {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
         {user && location.userId === user.id ? <EditLocation /> : null}
+        <LocationReviews />
       </div>
       )
     }
