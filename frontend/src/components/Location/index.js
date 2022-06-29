@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { getLocation, getLocations, removeLocation } from '../../store/location';
+import EditLocation from '../EditLocation';
 
 
-function Location() {
+function Location({hideForm}) {
   const { locationId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -23,16 +24,34 @@ function Location() {
     dispatch(getLocations())
   }, [dispatch])
 
+
   const destroy = (e) => {
     e.preventDefault()
     dispatch(removeLocation(location.id, user.id))
     history.push('/')
   };
   const editRedirect = (e) => {
+
     e.preventDefault();
-    console.log('edit clicked', location.id);
-    history.push({pathname: `/edit-location/${location.id}` , state: {location}})
+    // console.log('edit clicked', location.id);
+    // history.push({pathname: `/location/${location.id}/edit` , state: {location}})
+    let hide = document.querySelector('#hideEditLocation');
+    // hideForm(false)
+    if (hide = document.querySelector('.hideEditLocation')) {
+      let button = document.querySelector('#locationEditButton');
+      button.innerHTML = 'Cancel Edit'
+      hide.className = 'showEditLocation'
+
+    } else {
+      let hide = document.querySelector('#hideEditLocation');
+      console.log(hide)
+      hide.className = 'hideEditLocation'
+      let button = document.querySelector('#locationEditButton');
+      console.log(button)
+      button.innerHTML = 'Edit'
+    }
   }
+
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   setErrors([]);
@@ -57,13 +76,13 @@ function Location() {
     } else {
       return(
       <div>
-        <h1>{location.name}</h1>
+        <h1 id='locationDisplayName'>{location.name}</h1>
         <p>Located at {location.address}</p>
         <p>{location.city}, {location.state}, {location.country}</p>
         <p>Cost per night ${location.price}</p>
-        {user && location.userId === user.id ? <button onClick={editRedirect}>edit</button>   : null}
+        {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton'>Edit</button>   : null}
         {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
-
+        {user && location.userId === user.id ? <EditLocation /> : null}
       </div>
       )
     }
