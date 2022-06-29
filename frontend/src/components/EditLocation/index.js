@@ -23,12 +23,12 @@ const EditLocation = ({hideForm}) => {
     const sessionUser = useSelector(state => state.session.user);
 
     //edit form
-    const [name, setName] = useState(location ? location.name : null);
-    const [address, setAddress] = useState(location.address);
-    const [city, setCity] = useState(location.city);
-    const [state, setState] = useState(location.state);
-    const [country, setCountry] = useState(location.country);
-    const [price, setPrice] = useState(location.price);
+    const [name, setName] = useState(location ? location.name : '');
+    const [address, setAddress] = useState(location ? location.address : '');
+    const [city, setCity] = useState(location ? location.city : '');
+    const [state, setState] = useState(location ? location.state : '');
+    const [country, setCountry] = useState(location ? location.country : '');
+    const [price, setPrice] = useState(location ? location.price : '');
 
     useEffect(() => {
         dispatch(getLocations())
@@ -72,7 +72,7 @@ const EditLocation = ({hideForm}) => {
 
     if (!user || !sessionUser) {
         return <h1>Not Allowed</h1>
-    } else if (location) {
+    } else if (location.name !== '') {
         return (
         <div className='hideEditLocation' id='hideEditLocation'>
         <form>
@@ -100,7 +100,8 @@ const EditLocation = ({hideForm}) => {
     )
     } else {
         return (
-            <p>Wait</p>
+            <h1>You can't be here! Please go back home.</h1>
+
         )
     }
 }
