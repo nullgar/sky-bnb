@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { getLocation, getLocations, removeLocation } from '../../store/location';
@@ -80,9 +80,9 @@ function Location({hideForm}) {
       return(
       <div>
         <h1 id='locationDisplayName'>{location.name}</h1>
-        <p>Located at {location.address}</p>
-        <p>{location.city}, {location.state}, {location.country}</p>
-        <p>Cost per night ${location.price}</p>
+        <p id='locationDisplayAddress'>Located at {location.address}</p>
+        <p id='locationDisplayCity'>{location.city}, <p>{location.state}</p>, <p>{location.country}</p></p>
+        <p id='locationDisplayCost'>Cost per night ${location.price}</p>
         {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton'>Edit</button>   : null}
         {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
         {user && location.userId === user.id ? <EditLocation /> : null}

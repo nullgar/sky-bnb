@@ -10,10 +10,14 @@ const router = express.Router();
 
 
 router.get('/', asyncHandler(async function(req, res) {
-    const images = await Review.findAll();
-    return res.json(images);
+    const review = await Review.findAll();
+    return res.json(review);
 }));
 
+router.post('/', asyncHandler(async function(req, res) {
+    const images = await Review.create(req.body);
+    return res.json(images);
+}));
 
 
 module.exports = router;

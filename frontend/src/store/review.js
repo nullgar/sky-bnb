@@ -9,6 +9,10 @@ const get = (reviews) => ({
     type: GET,
     reviews
 });
+const create = (reviews) => ({
+    type: CREATE,
+    reviews
+});
 
 
 export const getReviews = () => async dispatch => {
@@ -18,6 +22,21 @@ export const getReviews = () => async dispatch => {
         const reviews = await res.json();
         dispatch(get(reviews));
         return reviews;
+    }
+};
+
+export const createReview = (data) =>async dispatch => {
+
+    const res = await csrfFetch(`/api/reviews/`, {
+        method: "POST",
+        header: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+        const review = await res.json();
+        dispatch(create(data));
+        return review;
     }
 }
 
@@ -32,8 +51,16 @@ const reviewReducer = (state = {}, action) => {
                 ...allReviews,
                 ...state
             }
-            default:
-                return state;
+        case CREATE:
+            Object.values(action.reviews).forEach(review => {
+                state[review.id] = review;
+            });
+            return {
+                ...allReviews,
+                ...state
+            }
+        default:
+            return state;
     }
 }
 

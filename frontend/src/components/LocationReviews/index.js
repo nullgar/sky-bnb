@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getReviews } from '../../store/review';
+import CreateNewReview from '../CreateNewReview';
 
 
 
@@ -11,28 +12,21 @@ const LocationReviews = () => {
     const reviews = useSelector(state => {
         return Object.values(state.review);
     });
-    console.log(locationId)
-   reviews.map(review=> {
-        if (review.locationId === parseInt(locationId)) console.log(review.review)
-    })
+
+    const sessionUser = useSelector(state => state.session.user);
     useEffect(() => {
         dispatch(getReviews())
     }, [dispatch]);
 
-    const pingReviews = (e) => {
-        e.preventDefault();
 
-
-        console.log('click')
-    }
     if (reviews) {
     return (
         <div>
             Reviews Go Here
             {reviews.map(review => {
                 if (review.locationId === parseInt(locationId)) return <p key={review.id}>{review.review}</p>
-        })}
-            <button onClick={pingReviews}>Ping</button>
+            })}
+            <CreateNewReview />
         </div>
     )
     } else {<h1>wait</h1>}

@@ -65,8 +65,18 @@ const EditLocation = ({hideForm}) => {
         let button = document.querySelector('#locationEditButton');
 
         button.innerHTML = 'Edit'
+
         let nameField = document.querySelector('#locationDisplayName');
         nameField.innerHTML = name
+        let addressField = document.querySelector('#locationDisplayAddress');
+        addressField.innerHTML = address
+        let cityField = document.querySelector('#locationDisplayCity');
+        cityField.innerHTML = city
+        let costField = document.querySelector('#locationDisplayCost');
+        costField.innerHTML = price
+
+        // let nameField = document.querySelector('#locationDisplayName');
+        // nameField.innerHTML = name
         // history.push(`/location/${locationId}`)
     };
 

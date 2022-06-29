@@ -25,8 +25,8 @@ function CreateNewLocation() {
 
     const formSubmit = async (e) => {
         const userId = (parseInt(sessionUser.id))
-
         e.preventDefault();
+
         const data = {
             userId,
             name,
