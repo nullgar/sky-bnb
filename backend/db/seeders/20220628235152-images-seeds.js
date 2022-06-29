@@ -8,7 +8,7 @@ module.exports = {
 
       Example:
       */
-   return queryInterface.bulkInsert('Image', [
+   return queryInterface.bulkInsert('Images', [
     {
       locationId: 1,
       url: 'https://images.uesp.net/7/7c/SR-place-The_Bannered_Mare.jpg'
@@ -23,6 +23,6 @@ module.exports = {
 
       Example:
       */
-   return queryInterface.bulkDelete('Image', null, {});
+   return queryInterface.bulkDelete('Images', null, {});
   }
 };
