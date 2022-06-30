@@ -13,19 +13,6 @@ function LocationsDisplay() {
   })
 
 
-  // if (sessionUser !== undefined) {
-  //   return (
-  //     <ul>
-  //       <li>
-  //         <NavLink exact to="/">Home</NavLink>
-  //         <NavLink to ='/new-location'>Create New Location</NavLink>
-
-  //         {isLoaded && sessionLinks}
-  //       </li>
-  //     </ul>
-  //   );
-  // }
-
   useEffect(() => {
     dispatch(getLocations())
   }, [dispatch, user])

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
 import { getLocation, getLocations, removeLocation } from '../../store/location';
 import EditLocation from '../EditLocation';
+import LocationImages from '../LocationImage/LocationImages';
+
 import LocationReviews from '../LocationReviews';
 
 
@@ -25,10 +27,11 @@ function Location({hideForm}) {
     dispatch(getLocations())
   }, [dispatch])
 
-
+  const backupInfo = useLocation();
+  const backup = parseInt(backupInfo.pathname.split('/')[2])
   const destroy = (e) => {
     e.preventDefault()
-    dispatch(removeLocation(location.id, user.id))
+    dispatch(removeLocation(backup, user.id))
     history.push('/')
   };
   const editRedirect = (e) => {
@@ -54,6 +57,11 @@ function Location({hideForm}) {
     }
   }
 
+  // const imageClick = async (e) => {
+  //   e.preventDefault();
+  //   const images = await dispatch(getImages(locationId))
+  //   console.log(images)
+  // }
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   setErrors([]);
@@ -81,6 +89,7 @@ function Location({hideForm}) {
       return(
       <div>
         <h1 id='locationDisplayName'>{location.name}</h1>
+        <LocationImages />
         <p id='locationDisplayAddress'>Located at {location.address}</p>
         <p id='locationDisplayCity'>{location.city}, {location.state}, {location.country}</p>
         <p id='locationDisplayCost'>Cost per night ${location.price}</p>
