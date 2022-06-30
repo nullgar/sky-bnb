@@ -17,7 +17,7 @@ const LocationImages = () => {
         return state.images;
     })
     const user = useSelector(state => {
-        return state.session.user.id
+        return state.session.user
     })
     const location = useSelector(state => {
         return state.location[backup]
@@ -30,7 +30,7 @@ const LocationImages = () => {
 
     console.log(images)
 
-    if(images !== undefined)
+    if(images !== undefined && user)
     {
     return (
         <div>
@@ -40,7 +40,7 @@ const LocationImages = () => {
                     <img src={image.url} />
                 </div>
             ))}
-            {user === location.userId ? <CreateNewLocationImage /> : null}
+            {user.id === location.userId ? <CreateNewLocationImage /> : null}
         </div>
     )
     }
