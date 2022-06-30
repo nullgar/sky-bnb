@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
 import { getLocation, getLocations, removeLocation } from '../../store/location';
 import EditLocation from '../EditLocation';
-import LocationImages from '../LocationImages';
+import LocationImages from '../LocationImage/LocationImages';
+
 import LocationReviews from '../LocationReviews';
 
 

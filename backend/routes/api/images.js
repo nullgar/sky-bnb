@@ -17,9 +17,7 @@ router.get('/:locationId', asyncHandler(async function(req, res) {
 }));
 
 router.post('/:locationId', asyncHandler(async function(req, res) {
-    const { locationId } = req.params;
-    const id = parseInt(locationId);
-    const images = await Review.create(req.body);
+    const images = await Image.create(req.body);
 
     return res.json(images);
 }));

@@ -26,19 +26,19 @@ export const getImages = (locationId) => async dispatch => {
     }
 };
 
-export const createImage = (data) =>async dispatch => {
+export const createImage = (data, locationId) => async dispatch => {
 
-    const res = await csrfFetch(`/api/reviews/`, {
+    const res = await csrfFetch(`/api/images/${locationId}`, {
         method: "POST",
         header: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     });
 
-    if (res.ok) {
-        const review = await res.json();
-        dispatch(create(review));
-        return review;
-    }
+    // if (res.ok) {
+    //     const image = await res.json();
+    //     // dispatch(create(image));
+    //     return image;
+    // };
 };
 
 const imagesReducer = (state = [], action) => {
