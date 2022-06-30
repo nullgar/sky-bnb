@@ -26,19 +26,20 @@ export const getImages = (locationId) => async dispatch => {
     }
 };
 
-export const createImage = (data, locationId) => async dispatch => {
+export const createImage = (data) => async dispatch => {
 
-    const res = await csrfFetch(`/api/images/${locationId}`, {
+    const res = await csrfFetch(`/api/images/`, {
         method: "POST",
         header: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     });
 
-    // if (res.ok) {
-    //     const image = await res.json();
-    //     // dispatch(create(image));
-    //     return image;
-    // };
+    if (res.ok) {
+        const image = await res.json();
+        console.log('image in createImage------',image)
+        dispatch(create(image));
+        return image;
+    }
 };
 
 const imagesReducer = (state = [], action) => {
@@ -50,7 +51,23 @@ const imagesReducer = (state = [], action) => {
             });
             return {
                 ...allImages
+            };
+        case CREATE:
+
+            if (!state[action.image.id]) {
+                const newState = {
+                    ...state,
+                    [action.image.id]: action.image
+                };
+                return newState
             }
+            return {
+                ...state,
+                [action.image.id]: {
+                    ...state[action.image.id],
+                    ...action.image
+                }
+            };
         default:
             return state
     }

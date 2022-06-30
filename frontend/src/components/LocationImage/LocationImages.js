@@ -28,7 +28,7 @@ const LocationImages = () => {
         dispatch(getLocations());
     }, [dispatch])
 
-    console.log(user, location.userId)
+    console.log(images)
 
     if(images !== undefined)
     {

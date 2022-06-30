@@ -18,7 +18,7 @@ const CreateNewLocationImage = () => {
 
     useEffect(() => {
 
-        dispatch(createImage(backup));
+        dispatch(getImages(backup));
     }, [dispatch])
 
     const addLocationImage = async (e) => {
