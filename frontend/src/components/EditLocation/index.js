@@ -28,7 +28,6 @@ const EditLocation = ({hideForm}) => {
     const [name, setName] = useState(location ? location.name : '');
     const [address, setAddress] = useState(location ? location.address : '');
     const [city, setCity] = useState(location ? location.city : '');
-    const [state, setState] = useState(location ? location.state : '');
     const [country, setCountry] = useState(location ? location.country : '');
     const [price, setPrice] = useState(location ? location.price : '');
 
@@ -40,7 +39,6 @@ const EditLocation = ({hideForm}) => {
     const updateName = (e) => setName(e.target.value);
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
-    const updateState = (e) => setState(e.target.value);
     const updateCountry = (e) => setCountry(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
 
@@ -55,7 +53,6 @@ const EditLocation = ({hideForm}) => {
             name,
             address,
             city,
-            state,
             country,
             price
         }
@@ -101,9 +98,6 @@ const EditLocation = ({hideForm}) => {
 
         <label>City: </label>
         <input type='text' name='city' onChange={updateCity} value={city}></input>
-
-        <label>State: </label>
-        <input type='text' name='state' onChange={updateState} value={state}></input>
 
         <label>Country: </label>
         <input type='text' name='country' onChange={updateCountry} value={country}></input>

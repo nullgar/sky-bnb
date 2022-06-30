@@ -12,46 +12,31 @@ function CreateNewLocation() {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
-    const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [price, setPrice] = useState(0);
     const [valErrors, setValErrors] = useState([]);
 
-    // Example
-    // useEffect(() => {
-    //     const errors = [];
-    //     if (sweetness < 1 || sweetness > 10) {
-    //       errors.push("Sweetness must be between 1 and 10")
-    //     }
-
-    //     if (name.length < 3) {
-    //       errors.push(	"Name must be 3 or more characters")
-    //     } else if (name.length > 20) {
-    //       errors.push(	"Name must be 20 characters or less")
-    //     }
-
-    //     if (fruits.find(fruit => fruit.name === name)) {
-    //       errors.push("Name already exists.")
-    //     }
-    //     setValErrors(errors);
-    //   }, [name, sweetness])
 
     useEffect(() => {
         const errors = [];
-        if (name === '' && name.length < 3) {
+        if (name.length < 3) {
             errors.push(`Location's Name must be longer than 3 characters!`)
         } else if (name.length > 100) {
             errors.push(`Location's Name must be longer than 100 characters!`)
         }
-        if (name === '' && name.length < 3) {
-            errors.push(`Location's Name must be longer than 3 characters!`)
+        if (city.length <= 1) {
+            errors.push(`Location's City cannot be empty!`)
         }
-        if (fruits.find(fruit => fruit.name === name)) {
-            errors.push("Name already exists.")
-          }
+        if (country.length <= 1) {
+            errors.push(`Location's Country cannot be empty!`)
+        }
+        if (price <= 0) {
+            errors.push(`Location's Price connot be free!`)
+        }
 
         setValErrors(errors);
-    }, [name])
+    }, [name, city, country, price]);
+
     const formSubmit = async (e) => {
         const userId = (parseInt(sessionUser.id))
         e.preventDefault();
@@ -61,7 +46,6 @@ function CreateNewLocation() {
             name,
             address,
             city,
-            state,
             country,
             price
         }
@@ -80,7 +64,6 @@ function CreateNewLocation() {
                 ))}
             </ul>
             <form onSubmit={formSubmit}>
-                {/* <input type='hidden' value={userId} /> */}
                 <label>Name: </label>
                 <input type='text' name='name' onChange={(e) => setName(e.target.value)} value={name} required='required'></input>
 
@@ -89,9 +72,6 @@ function CreateNewLocation() {
 
                 <label>City: </label>
                 <input type='text' name='city' onChange={(e) => setCity(e.target.value)} value={city} required='required'></input>
-
-                <label>State: </label>
-                <input type='text' name='state' onChange={(e) => setState(e.target.value)} value={state} required='required'></input>
 
                 <label>Country: </label>
                 <input type='text' name='country' onChange={(e) => setCountry(e.target.value)} value={country} required='required'></input>

@@ -32,7 +32,7 @@ function LocationsDisplay() {
                     <Link to={`/location/${location.id}`}> {location.name} </Link>
                 </h1>
                 <p>
-                    {location.city}, {location.state}
+                    {location.city}, {location.country}
                 </p>
             </div>
         )): null}
