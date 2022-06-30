@@ -66,14 +66,15 @@ const EditLocation = ({hideForm}) => {
 
         button.innerHTML = 'Edit'
 
-        let nameField = document.querySelector('#locationDisplayName');
-        nameField.innerHTML = name
-        let addressField = document.querySelector('#locationDisplayAddress');
-        addressField.innerHTML = address
-        let cityField = document.querySelector('#locationDisplayCity');
-        cityField.innerHTML = `${city}, ${state}, ${country}`
-        let costField = document.querySelector('#locationDisplayCost');
-        costField.innerHTML = price
+        //this made it seem dynamic
+        // let nameField = document.querySelector('#locationDisplayName');
+        // nameField.innerHTML = name
+        // let addressField = document.querySelector('#locationDisplayAddress');
+        // addressField.innerHTML = address
+        // let cityField = document.querySelector('#locationDisplayCity');
+        // cityField.innerHTML = `${city}, ${state}, ${country}`
+        // let costField = document.querySelector('#locationDisplayCost');
+        // costField.innerHTML = price
 
         // let nameField = document.querySelector('#locationDisplayName');
         // nameField.innerHTML = name

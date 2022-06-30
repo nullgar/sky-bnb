@@ -73,7 +73,7 @@ const reviewReducer = (state = [], action) => {
                 ...allReviews
             }
             case CREATE:
-                console.log(action.review)
+
                 if (!state[action.review.id]) {
                     const newState = {
                         ...state,

@@ -99,7 +99,7 @@ export const removeLocation = (locationId, userId) => async dispatch => {
     }
 }
 
-const locationReducer = (state = {}, action) => {
+const locationReducer = (state = [], action) => {
     const allLocations = {};
     switch (action.type) {
         case GET:
@@ -125,12 +125,18 @@ const locationReducer = (state = {}, action) => {
 
             return newState;
         case UPDATE:
-            return {
-                    ...allLocations,
-                    ...state
 
-                };
+            const updateState = {...state}
+            // console.log(updateState)
+            Object.values(updateState).map(review => {
+                console.log(review.id)
+                console.log(action.location.location)
+                if (review.id === action.location.id) {
+                    updateState[action.location.id] = action.location.location
+                }
 
+            });
+            return updateState
 
 
         default:
