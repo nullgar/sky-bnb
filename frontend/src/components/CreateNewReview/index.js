@@ -17,8 +17,8 @@ const CreateNewReview = () => {
         e.preventDefault();
 
         const data = {
-            userId,
             locationId,
+            userId,
             review
         };
 

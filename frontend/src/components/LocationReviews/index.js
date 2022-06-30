@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getReviews } from '../../store/review';
+import { getReviews, removeReview } from '../../store/review';
 import CreateNewReview from '../CreateNewReview';
 
 
@@ -19,9 +19,12 @@ const LocationReviews = () => {
         dispatch(getReviews( locationId ))
     }, [dispatch]);
 
-    const reviewDelete = () => {
-        console.log('delete click')
-    }
+    const reviewDelete = (e) => {
+        const reviewId = parseInt(e.target.id);
+        // const locationIdReview = parseInt(locationId);
+        const userReviewId = parseInt(sessionUser.id);
+        dispatch(removeReview(reviewId, userReviewId));
+    };
 
     if (reviews && sessionUser) {
 
@@ -32,7 +35,7 @@ const LocationReviews = () => {
             {reviews.map(review => (
                 <div key={review.id}>
                     <p>{review.review}</p>
-                    {review.userId === sessionUser.id ? <button onClick={reviewDelete}>delete</button> : null}
+                    {review.userId === sessionUser.id ? <button onClick={reviewDelete} id={review.id}>delete</button> : null}
                 </div>
             ))}
             <CreateNewReview />
