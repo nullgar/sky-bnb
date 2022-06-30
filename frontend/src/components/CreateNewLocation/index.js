@@ -24,6 +24,9 @@ function CreateNewLocation() {
         } else if (name.length > 100) {
             errors.push(`Location's Name must be longer than 100 characters!`)
         }
+        if (address.length <= 1) {
+            errors.push(`Location's Address cannot be empty!`)
+        }
         if (city.length <= 1) {
             errors.push(`Location's City cannot be empty!`)
         }
@@ -35,7 +38,7 @@ function CreateNewLocation() {
         }
 
         setValErrors(errors);
-    }, [name, city, country, price]);
+    }, [name, city, address, country, price]);
 
     const formSubmit = async (e) => {
         const userId = (parseInt(sessionUser.id))

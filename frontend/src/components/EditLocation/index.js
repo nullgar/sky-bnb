@@ -30,11 +30,34 @@ const EditLocation = ({hideForm}) => {
     const [city, setCity] = useState(location ? location.city : '');
     const [country, setCountry] = useState(location ? location.country : '');
     const [price, setPrice] = useState(location ? location.price : '');
+    const [valErrors, setValErrors] = useState([]);
 
     useEffect(() => {
         dispatch(getLocations())
     }, [dispatch])
 
+    useEffect(() => {
+        const errors = [];
+        if (name.length < 3) {
+            errors.push(`Location's Name must be longer than 3 characters!`)
+        } else if (name.length > 100) {
+            errors.push(`Location's Name must be longer than 100 characters!`)
+        }
+        if (address.length <= 1) {
+            errors.push(`Location's Address cannot be empty!`)
+        }
+        if (city.length <= 1) {
+            errors.push(`Location's City cannot be empty!`)
+        }
+        if (country.length <= 1) {
+            errors.push(`Location's Country cannot be empty!`)
+        }
+        if (price <= 0) {
+            errors.push(`Location's Price connot be free!`)
+        }
+
+        setValErrors(errors);
+    }, [name, city, address, country, price]);
 
     const updateName = (e) => setName(e.target.value);
     const updateAddress = (e) => setAddress(e.target.value);
@@ -45,9 +68,8 @@ const EditLocation = ({hideForm}) => {
     const handleSubmit = async (e) => {
        e.preventDefault();
        const userId = user
+       setValErrors([]);
 
-       console.log(backup)
-        e.preventDefault();
         const data = {
             userId,
             name,
@@ -68,19 +90,7 @@ const EditLocation = ({hideForm}) => {
 
         button.innerHTML = 'Edit'
 
-        //this made it seem dynamic
-        // let nameField = document.querySelector('#locationDisplayName');
-        // nameField.innerHTML = name
-        // let addressField = document.querySelector('#locationDisplayAddress');
-        // addressField.innerHTML = address
-        // let cityField = document.querySelector('#locationDisplayCity');
-        // cityField.innerHTML = `${city}, ${state}, ${country}`
-        // let costField = document.querySelector('#locationDisplayCost');
-        // costField.innerHTML = price
 
-        // let nameField = document.querySelector('#locationDisplayName');
-        // nameField.innerHTML = name
-        // history.push(`/location/${updatedLocation}`)
     };
 
 
@@ -89,23 +99,28 @@ const EditLocation = ({hideForm}) => {
     } else if (Object.values(location)) {
         return (
         <div className='hideEditLocation' id='hideEditLocation'>
-        <form>
-        <label>Name: </label>
-        <input type='text' name='name' onChange={updateName} value={name}></input>
+            <ul>
+                {valErrors.map(err => (
+                    <li key={err}>{err}</li>
+                ))}
+            </ul>
+            <form>
+                <label>Name: </label>
+                <input type='text' name='name' onChange={updateName} value={name}></input>
 
-        <label>Address: </label>
-        <input type='text' name='address' onChange={updateAddress} value={address}></input>
+                <label>Address: </label>
+                <input type='text' name='address' onChange={updateAddress} value={address}></input>
 
-        <label>City: </label>
-        <input type='text' name='city' onChange={updateCity} value={city}></input>
+                <label>City: </label>
+                <input type='text' name='city' onChange={updateCity} value={city}></input>
 
-        <label>Country: </label>
-        <input type='text' name='country' onChange={updateCountry} value={country}></input>
+                <label>Country: </label>
+                <input type='text' name='country' onChange={updateCountry} value={country}></input>
 
-        <label>Price: </label>
-        <input type='text' name='price' onChange={updatePrice} value={price}></input>
-        <button onClick={handleSubmit}>submit</button>
-        </form>
+                <label>Price: </label>
+                <input type='text' name='price' onChange={updatePrice} value={price}></input>
+                <button onClick={handleSubmit}>submit</button>
+            </form>
 
         </div>
     )
