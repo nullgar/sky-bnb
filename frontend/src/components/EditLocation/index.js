@@ -11,17 +11,12 @@ const EditLocation = ({hideForm}) => {
     const location = useSelector(state => {
         return state.location[locationId];
     });
-
     const user = useSelector(state => {
        return state.session.user.id
     });
 
-
-
     const backupInfo = useLocation();
     const backup = parseInt(backupInfo.pathname.split('/')[2])
-    // location.id === undefined ? location.id = backup : null;
-
     const sessionUser = useSelector(state => state.session.user);
 
     //edit form
@@ -119,7 +114,7 @@ const EditLocation = ({hideForm}) => {
 
                 <label>Price: </label>
                 <input type='text' name='price' onChange={updatePrice} value={price}></input>
-                <button onClick={handleSubmit}>submit</button>
+                <button onClick={handleSubmit} disabled={!!valErrors.length}>submit</button>
             </form>
 
         </div>

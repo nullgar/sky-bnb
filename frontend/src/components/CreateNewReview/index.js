@@ -11,6 +11,16 @@ const CreateNewReview = () => {
 
 
     const [review, setReview] = useState('');
+    const [valErrors, setValErrors] = useState([]);
+
+    useEffect(() => {
+        const errors = [];
+        if (review.length <= 0) {
+          errors.push("Please provide a Review")
+        }
+
+        setValErrors(errors);
+    }, [review])
 
     const submitReview = async (e) => {
         const userId = (parseInt(sessionUser.id));
@@ -30,9 +40,13 @@ const CreateNewReview = () => {
 
     return (
         <form>
-            <label></label>
+            <ul>
+                {valErrors.map(err => (
+                    <li key={err}>{err}</li>
+                ))}
+            </ul>
             <textarea type='text' name='review' value={review} onChange={(e) => setReview(e.target.value)} ></textarea>
-            <button onClick={submitReview}>Submit Review</button>
+            <button onClick={submitReview} disabled={!!valErrors.length} >Submit Review</button>
         </form>
     )
 }
