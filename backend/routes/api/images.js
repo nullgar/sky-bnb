@@ -9,7 +9,12 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 
-router.get('/', asyncHandler(async function(req, res) {
-    const images = await Image.findAll();
+router.get('/:locationId', asyncHandler(async function(req, res) {
+    const { locationId } = req.params;
+    const id = parseInt(locationId);
+    const images = await Image.findAll({ where: { id: locationId }});
     return res.json(images);
 }));
+
+
+module.exports = router;
