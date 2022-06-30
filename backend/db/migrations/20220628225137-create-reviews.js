@@ -1,12 +1,21 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Locations', {
+    return queryInterface.createTable('Reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      locationId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Locations',
+          key: 'id'
+        },
+        onDelete: 'CASCADE'
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -17,30 +26,8 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       },
-      address: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-        unique: true
-      },
-      city: {
-        type: Sequelize.STRING(100),
-        allowNull: false
-      },
-      state: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },
-      country: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },
-      name: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-      },
-      price: {
-        type: Sequelize.DECIMAL(10,2),
-        allowNull: false,
+      review: {
+        type: Sequelize.STRING(250)
       },
       createdAt: {
         allowNull: false,
@@ -55,6 +42,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Locations');
+    return queryInterface.dropTable('Reviews');
   }
 };

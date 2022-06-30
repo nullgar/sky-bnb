@@ -29,6 +29,11 @@ module.exports = {
         username: 'orgnar',
         hashedPassword: bcrypt.hashSync('SkyrimRocks@2')
       },
+      {
+        email: 'nullgar@skybnb.com',
+        username: 'nullgar',
+        hashedPassword: bcrypt.hashSync('testing@1')
+      },
 
     ], {});
   },

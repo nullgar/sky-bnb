@@ -29,14 +29,14 @@ function App() {
           {/* <Route exact path="/location">
             <Location />
           </Route> */}
-          <Route exact path="/location/:locationId">
-            <Location />
-          </Route>
-          <Route path="/new-location/">
+          <Route path="/location/new">
             <CreateNewLocation />
           </Route>
-          <Route path="/edit-location/:locationId">
+          {/* <Route path="/location/:locationId/edit">
             <EditLocation />
+          </Route> */}
+          <Route exact path="/location/:locationId">
+            <Location hideForm={() => Location(false)}/>
           </Route>
           <Route path="/login">
             <LoginFormPage />

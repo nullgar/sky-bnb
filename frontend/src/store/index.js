@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 
 import sessionReducer from './session';
 import locationReducer from './location';
+import reviewReducer from './review';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  location: locationReducer
+  location: locationReducer,
+  review: reviewReducer
 });
 
 let enhancer;

@@ -2,30 +2,37 @@ import React, { useEffect, useState, useValue } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { getLocations, updateLocation } from '../../store/location';
+import './EditLocation.css'
 
-const EditLocation = () => {
+const EditLocation = ({hideForm}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { locationId } = useParams();
-
-    const locationInfo = useLocation();
-
+    const location = useSelector(state => {
+        return state.location[locationId];
+    });
     const user = useSelector(state => {
        return state.session.user.id
-    })
-    const location = locationInfo.state.location;
-    // locationInfo !== undefined ? location = locationInfo.state.location : location = locationBackup;
+    });
+
+
+
+    const backupInfo = useLocation();
+    // const backup = backupInfo.state.location.name
+    //// locationInfo !== undefined ? location = locationInfo.state.location : location = locationBackup;
     const sessionUser = useSelector(state => state.session.user);
 
     //edit form
-    const [name, setName] = useState(location.name);
-    const [address, setAddress] = useState(location.address);
-    const [city, setCity] = useState(location.city);
-    const [state, setState] = useState(location.state);
-    const [country, setCountry] = useState(location.country);
-    const [price, setPrice] = useState(location.price);
+    const [name, setName] = useState(location ? location.name : '');
+    const [address, setAddress] = useState(location ? location.address : '');
+    const [city, setCity] = useState(location ? location.city : '');
+    const [state, setState] = useState(location ? location.state : '');
+    const [country, setCountry] = useState(location ? location.country : '');
+    const [price, setPrice] = useState(location ? location.price : '');
 
-
+    useEffect(() => {
+        dispatch(getLocations())
+    }, [dispatch])
 
 
     const updateName = (e) => setName(e.target.value);
@@ -52,18 +59,34 @@ const EditLocation = () => {
 
         let updatedLocation;
         updatedLocation = await dispatch(updateLocation(data, location.id));
-        history.push(`/location/${location.id}`)
-    //    console.log(data)
+        let hide = document.querySelector('#hideEditLocation');
+
+        hide.className = 'hideEditLocation'
+        let button = document.querySelector('#locationEditButton');
+
+        button.innerHTML = 'Edit'
+
+        //this made it seem dynamic
+        // let nameField = document.querySelector('#locationDisplayName');
+        // nameField.innerHTML = name
+        // let addressField = document.querySelector('#locationDisplayAddress');
+        // addressField.innerHTML = address
+        // let cityField = document.querySelector('#locationDisplayCity');
+        // cityField.innerHTML = `${city}, ${state}, ${country}`
+        // let costField = document.querySelector('#locationDisplayCost');
+        // costField.innerHTML = price
+
+        // let nameField = document.querySelector('#locationDisplayName');
+        // nameField.innerHTML = name
+        // history.push(`/location/${locationId}`)
     };
-    const cancel = (e) => {
-        history.push(`/location/${locationId}`)
-    }
+
 
     if (!user || !sessionUser) {
         return <h1>Not Allowed</h1>
-    } else {
+    } else if (Object.values(location)) {
         return (
-        <div>
+        <div className='hideEditLocation' id='hideEditLocation'>
         <form>
         <label>Name: </label>
         <input type='text' name='name' onChange={updateName} value={name}></input>
@@ -84,9 +107,14 @@ const EditLocation = () => {
         <input type='text' name='price' onChange={updatePrice} value={price}></input>
         <button onClick={handleSubmit}>submit</button>
         </form>
-        <button onClick={cancel}>Cancel</button>
+
         </div>
     )
+    } else {
+        return (
+            <h1>You can't be here! Please go back home.</h1>
+
+        )
     }
 }
 

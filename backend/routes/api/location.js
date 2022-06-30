@@ -46,11 +46,11 @@ router.put(
     '/:id',
 
     asyncHandler( async (req, res) => {
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
         const location = req.body
-        const updatedLocation = await Location.update(location , { where: { id: id } })
+        const updatedLocation = await Location.update({...location}, { where: { id: id } })
 
-        res.json(location)
+        res.json({id, location})
     })
 )
 

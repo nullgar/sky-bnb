@@ -5,6 +5,15 @@ module.exports = {
 
    return queryInterface.bulkInsert('Locations', [
     {
+      userId: 6,
+      address: 'Over Yonder',
+      city: 'A bedroll in the wilderness',
+      state: 'Whiterun Hold',
+      country: 'Skyrim',
+      name: 'Nullgars Ultra Secret Location',
+      price: 2500
+     },
+    {
     userId: 4,
     address: 'The Plains District',
     city: 'Whiterun',
