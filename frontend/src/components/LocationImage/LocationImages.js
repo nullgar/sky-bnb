@@ -28,9 +28,8 @@ const LocationImages = () => {
         dispatch(getLocations());
     }, [dispatch])
 
-    console.log(images)
 
-    if(images !== undefined && user)
+    if(images)
     {
     return (
         <div>
@@ -40,9 +39,11 @@ const LocationImages = () => {
                     <img src={image.url} />
                 </div>
             ))}
-            {user.id === location.userId ? <CreateNewLocationImage /> : null}
+            {user && user.id === location.userId ? <CreateNewLocationImage /> : null}
         </div>
     )
+    } else {
+        <p> image err </p>
     }
 }
 

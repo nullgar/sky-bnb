@@ -17,9 +17,7 @@ router.get('/:locationId', asyncHandler(async function(req, res) {
 }));
 
 router.post('/', asyncHandler(async function(req, res) {
-    console.log('body request-----', req.body)
     const image = await Image.create(req.body);
-    console.log('image from api to return -----------', image)
     return res.json(image);
 }));
 
