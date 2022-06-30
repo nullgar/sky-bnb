@@ -10,16 +10,16 @@ module.exports = {
       */
    return queryInterface.bulkInsert('Images', [
     {
-      locationId: 1,
+      locationId: 2,
       url: 'https://images.uesp.net/7/7c/SR-place-The_Bannered_Mare.jpg'
      },
      {
-      locationId: 1,
-      url: 'https://images.uesp.net/7/7c/SR-place-The_Bannered_Mare.jpg'
+      locationId: 3,
+      url: 'https://images.uesp.net/thumb/4/44/SR-place-Sleeping_Giant_Inn.jpg/800px-SR-place-Sleeping_Giant_Inn.jpg'
      },
      {
       locationId: 1,
-      url: 'https://images.uesp.net/7/7c/SR-place-The_Bannered_Mare.jpg'
+      url: 'https://static.wikia.nocookie.net/elderscrolls/images/c/c5/Bed.png'
      }
   ], {});
   },
