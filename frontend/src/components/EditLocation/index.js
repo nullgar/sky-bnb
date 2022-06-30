@@ -59,9 +59,7 @@ const EditLocation = ({hideForm}) => {
             country,
             price
         }
-        console.log('location-------',location);
-        console.log('data-------',data);
-        // onsole.log('state-------',)
+
         let updatedLocation;
         updatedLocation = parseInt(location.id)
         // console.log(updatedLocation)

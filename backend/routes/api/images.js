@@ -16,5 +16,12 @@ router.get('/:locationId', asyncHandler(async function(req, res) {
     return res.json(images);
 }));
 
+router.post('/:locationId', asyncHandler(async function(req, res) {
+    const { locationId } = req.params;
+    const id = parseInt(locationId);
+    const images = await Review.create(req.body);
+
+    return res.json(images);
+}));
 
 module.exports = router;
