@@ -26,10 +26,7 @@ const CreateNewReview = () => {
         newReview = await dispatch(createReview(data))
 
     }
-    // useEffect(() => {
-    //   dispatch(getReviews())
 
-    // }, [review]);
 
     return (
         <form>

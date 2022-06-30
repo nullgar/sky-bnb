@@ -8,25 +8,54 @@ function CreateNewLocation() {
     //const newLocation = useSelector(state => state.location)
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
-    const [cookies, setCookies] = useState('cookie');
-    // const [userId, setUserId] = useState();
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [price, setPrice] = useState(0);
-    const dispatch = useDispatch();
+    const [valErrors, setValErrors] = useState([]);
 
+    // Example
     // useEffect(() => {
-    //     dispatch(getLocations())
-    // }, [dispatch])
+    //     const errors = [];
+    //     if (sweetness < 1 || sweetness > 10) {
+    //       errors.push("Sweetness must be between 1 and 10")
+    //     }
 
+    //     if (name.length < 3) {
+    //       errors.push(	"Name must be 3 or more characters")
+    //     } else if (name.length > 20) {
+    //       errors.push(	"Name must be 20 characters or less")
+    //     }
 
+    //     if (fruits.find(fruit => fruit.name === name)) {
+    //       errors.push("Name already exists.")
+    //     }
+    //     setValErrors(errors);
+    //   }, [name, sweetness])
+
+    useEffect(() => {
+        const errors = [];
+        if (name === '' && name.length < 3) {
+            errors.push(`Location's Name must be longer than 3 characters!`)
+        } else if (name.length > 100) {
+            errors.push(`Location's Name must be longer than 100 characters!`)
+        }
+        if (name === '' && name.length < 3) {
+            errors.push(`Location's Name must be longer than 3 characters!`)
+        }
+        if (fruits.find(fruit => fruit.name === name)) {
+            errors.push("Name already exists.")
+          }
+
+        setValErrors(errors);
+    }, [name])
     const formSubmit = async (e) => {
         const userId = (parseInt(sessionUser.id))
         e.preventDefault();
-
+        setValErrors([]);
         const data = {
             userId,
             name,
@@ -45,28 +74,32 @@ function CreateNewLocation() {
     return (
         <div>
             <h1>Create a new location</h1>
+            <ul>
+                {valErrors.map(err => (
+                    <li key={err}>{err}</li>
+                ))}
+            </ul>
             <form onSubmit={formSubmit}>
-
                 {/* <input type='hidden' value={userId} /> */}
                 <label>Name: </label>
-                <input type='text' name='name' onChange={(e) => setName(e.target.value)} value={name}></input>
+                <input type='text' name='name' onChange={(e) => setName(e.target.value)} value={name} required='required'></input>
 
                 <label>Address: </label>
-                <input type='text' name='address' onChange={(e) => setAddress(e.target.value)} value={address}></input>
+                <input type='text' name='address' onChange={(e) => setAddress(e.target.value)} value={address} required='required'></input>
 
                 <label>City: </label>
-                <input type='text' name='city' onChange={(e) => setCity(e.target.value)} value={city}></input>
+                <input type='text' name='city' onChange={(e) => setCity(e.target.value)} value={city} required='required'></input>
 
                 <label>State: </label>
-                <input type='text' name='state' onChange={(e) => setState(e.target.value)} value={state}></input>
+                <input type='text' name='state' onChange={(e) => setState(e.target.value)} value={state} required='required'></input>
 
                 <label>Country: </label>
-                <input type='text' name='country' onChange={(e) => setCountry(e.target.value)} value={country}></input>
+                <input type='text' name='country' onChange={(e) => setCountry(e.target.value)} value={country} required='required'></input>
 
                 <label>Price: </label>
-                <input type='text' name='price' onChange={(e) => setPrice(e.target.value)} value={price}></input>
+                <input type='text' name='price' onChange={(e) => setPrice(e.target.value)} value={price} required='required'></input>
 
-                <button type='submit'>Submit Form</button>
+                <button type='submit' disabled={!!valErrors.length}>Submit Form</button>
             </form>
         </div>
     )
