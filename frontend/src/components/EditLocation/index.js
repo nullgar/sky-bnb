@@ -11,6 +11,7 @@ const EditLocation = ({hideForm}) => {
     const location = useSelector(state => {
         return state.location[locationId];
     });
+
     const user = useSelector(state => {
        return state.session.user.id
     });
@@ -18,8 +19,9 @@ const EditLocation = ({hideForm}) => {
 
 
     const backupInfo = useLocation();
-    // const backup = backupInfo.state.location.name
-    //// locationInfo !== undefined ? location = locationInfo.state.location : location = locationBackup;
+    const backup = parseInt(backupInfo.pathname.split('/')[2])
+    // location.id === undefined ? location.id = backup : null;
+
     const sessionUser = useSelector(state => state.session.user);
 
     //edit form
@@ -46,6 +48,7 @@ const EditLocation = ({hideForm}) => {
        e.preventDefault();
        const userId = user
 
+       console.log(backup)
         e.preventDefault();
         const data = {
             userId,
@@ -56,9 +59,13 @@ const EditLocation = ({hideForm}) => {
             country,
             price
         }
-
+        console.log('location-------',location);
+        console.log('data-------',data);
+        // onsole.log('state-------',)
         let updatedLocation;
-        updatedLocation = await dispatch(updateLocation(data, location.id));
+        updatedLocation = parseInt(location.id)
+        // console.log(updatedLocation)
+        await dispatch(updateLocation(data, backup));
         let hide = document.querySelector('#hideEditLocation');
 
         hide.className = 'hideEditLocation'
@@ -78,7 +85,7 @@ const EditLocation = ({hideForm}) => {
 
         // let nameField = document.querySelector('#locationDisplayName');
         // nameField.innerHTML = name
-        // history.push(`/location/${locationId}`)
+        // history.push(`/location/${updatedLocation}`)
     };
 
 

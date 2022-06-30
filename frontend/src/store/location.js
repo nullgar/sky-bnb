@@ -72,7 +72,7 @@ export const createLocation = (data) => async dispatch => {
 };
 
 export const updateLocation = (data, locationId) => async dispatch => {
-
+    console.log(locationId)
     const res = await csrfFetch(`/api/location/${locationId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},
@@ -82,7 +82,7 @@ export const updateLocation = (data, locationId) => async dispatch => {
     if (res.ok) {
         const updatedLocation  = await res.json();
         dispatch(update(updatedLocation));
-        return;
+        return updatedLocation;
     }
 }
 
@@ -129,8 +129,6 @@ const locationReducer = (state = [], action) => {
             const updateState = {...state}
             // console.log(updateState)
             Object.values(updateState).map(review => {
-                console.log(review.id)
-                console.log(action.location.location)
                 if (review.id === action.location.id) {
                     updateState[action.location.id] = action.location.location
                 }
