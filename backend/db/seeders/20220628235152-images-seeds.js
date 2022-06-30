@@ -12,6 +12,14 @@ module.exports = {
     {
       locationId: 1,
       url: 'https://images.uesp.net/7/7c/SR-place-The_Bannered_Mare.jpg'
+     },
+     {
+      locationId: 1,
+      url: 'https://images.uesp.net/7/7c/SR-place-The_Bannered_Mare.jpg'
+     },
+     {
+      locationId: 1,
+      url: 'https://images.uesp.net/7/7c/SR-place-The_Bannered_Mare.jpg'
      }
   ], {});
   },

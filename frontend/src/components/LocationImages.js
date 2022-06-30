@@ -12,24 +12,24 @@ const LocationImages = () => {
     const backup = parseInt(backupInfo.pathname.split('/')[2])
 
     const images = useSelector(state => {
-        return state.images[backup];
+        return state.images;
     })
 
     useEffect(() => {
         dispatch(getImages(backup))
     }, [dispatch])
 
-
+    console.log(images)
     if(images !== undefined)
     {
     return (
         <div>
             <button>Add Image</button>
             {Object.values(images).map(image => (
-                // console.log(image)
-                <img src={image} />
+                <div key={image.id + 7}>
+                    <img src={image.url} />
+                </div>
             ))}
-
 
         </div>
     )

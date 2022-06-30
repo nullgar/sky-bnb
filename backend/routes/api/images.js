@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/:locationId', asyncHandler(async function(req, res) {
     const { locationId } = req.params;
     const id = parseInt(locationId);
-    const images = await Image.findAll({ where: { id: locationId }});
+    const images = await Image.findAll({ where: { locationId: locationId }});
     return res.json(images);
 }));
 
