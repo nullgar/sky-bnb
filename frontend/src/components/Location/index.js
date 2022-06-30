@@ -74,8 +74,10 @@ function Location({hideForm}) {
 
 
     if (!location) {
-      return null
-    } else {
+      return (
+        <h1>There is nothing herer</h1>
+      )
+    } else if (location !== undefined) {
       return(
       <div>
         <h1 id='locationDisplayName'>{location.name}</h1>
