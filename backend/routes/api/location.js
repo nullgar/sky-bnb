@@ -10,38 +10,33 @@ const router = express.Router();
 // userId, name, address, city, country, price
 const validateLocation = [
     check('name')
-        .custom(val => {
-            return Location.findOne({where: {name: val}})
-                .then(location => {
-                    if (location) {
-                        return Promise.reject('Name already exists.')
-                    }
-                });
-        })
-        .isLength({ min: 3 })
-        .withMessage('Name needs to be longer than 3 characters.'),
+        .exists()
+        .withMessage('Name cannot be empty.')
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Name needs to be longer than 3 - 100 characters.'),
     check('address')
-        .custom(val => {
-            return Location.findOne({where: {name: val}})
-                .then(location => {
-                    if (location) {
-                        return Promise.reject('Location already exists')
-                    }
-                });
-        }),
+        .exists()
+        .withMessage('Address cannot be empty.')
+        .isLength({ min: 5, max: 100 })
+        .withMessage('Address needs to be between 5 - 100 characters.'),
     check('price')
+        .exists()
+        .withMessage('Price cannot be empty.')
         .matches(/\d+/)
-            .withMessage('Price needs to be a number!'),
-        // .withMessage('Please provide a unique location address.'),
-    // check('city')
-    //     .notEmpty()
-    //     .withMessage('Please provide the locations City.'),
-    // check('country')
-    //     .notEmpty()
-    //     .withMessage('Please provide the locations Country.'),
-    // check('price')
-    //     .notEmpty()
-    //     .withMessage('Please provide a Price.'),
+        .withMessage('Price needs to be a number!'),
+    check('city')
+        .exists()
+        .withMessage('Please provide the locations City.')
+        .isLength({ min: 3, max: 100 })
+        .withMessage('City needs to be between 3 - 100 characters.'),
+    check('country')
+        .exists()
+        .withMessage('Please provide the locations Country.')
+        .isLength({ min: 5, max: 50 })
+        .withMessage('City needs to be between 5 - 100 characters.'),
+    check('price')
+        .exists()
+        .withMessage('Please provide a Price.'),
 
     handleValidationErrors
 ];
@@ -66,14 +61,6 @@ router.post(
     asyncHandler(async (req, res, next) => {
 
         const data = await Location.create(req.body);
-        console.log('this is the route data ----',data)
-        if (!data) {
-            const err = new Error('Duplicate Address');
-            err.status = 401;
-            err.title = 'Duplicate Address';
-            err.errors = ['The provided address is a duplicate!'];
-            return next(err);
-        }
 
         res.json(data.id)
     })
@@ -81,13 +68,13 @@ router.post(
 
 router.put(
     '/:id',
-
+    validateLocation,
     asyncHandler( async (req, res) => {
         const id = parseInt(req.params.id);
-        const location = req.body
-        const updatedLocation = await Location.update({...location}, { where: { id: id } })
+        const location = req.body;
+        const updatedLocation = await Location.update({...location}, { where: { id: id } });
 
-        res.json({id, location})
+        res.json({id, location});
     })
 )
 

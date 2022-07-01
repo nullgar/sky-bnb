@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import reviewReducer, { createReview, getReviews } from '../../store/review';
+import { createReview, getReviews } from '../../store/review';
 
 const CreateNewReview = () => {
     const dispatch = useDispatch();
@@ -15,9 +15,6 @@ const CreateNewReview = () => {
 
     useEffect(() => {
         const errors = [];
-        if (review.length <= 0) {
-          errors.push("Please provide a Review")
-        }
 
         setValErrors(errors);
     }, [review])
@@ -32,20 +29,26 @@ const CreateNewReview = () => {
             review
         };
 
-        let newReview;
-        newReview = await dispatch(createReview(data))
 
+        const res = await dispatch(createReview(data))
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) setValErrors(data.errors);
+        });
+        if (res) {
+            setReview('')
+        }
     }
 
 
     return (
         <form>
             <ul>
-                {valErrors.map(err => (
-                    <li key={err}>{err}</li>
+                {valErrors.map((err, i) => (
+                    <li key={i}>{err}</li>
                 ))}
             </ul>
-            <textarea type='text' name='review' value={review} onChange={(e) => setReview(e.target.value)} ></textarea>
+            <textarea type='text' name='review' value={review} onChange={(e) => setReview(e.target.value)} id='reviewTextArea' ></textarea>
             <button onClick={submitReview} disabled={!!valErrors.length} >Submit Review</button>
         </form>
     )

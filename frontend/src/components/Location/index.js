@@ -93,8 +93,8 @@ function Location({hideForm}) {
         <p id='locationDisplayAddress'>Located at {location.address}</p>
         <p id='locationDisplayCity'>{location.city}, {location.country}</p>
         <p id='locationDisplayCost'>Cost per night ${location.price}</p>
-        {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton'>Edit</button>   : null}
-        {user && location.userId === user.id ? <button onClick={destroy}>delete</button> : null}
+        {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton'>Edit Location</button>   : null}
+        {user && location.userId === user.id ? <button onClick={destroy}>Delete Location</button> : null}
         {user && location.userId === user.id ? <EditLocation /> : null}
         <LocationReviews />
       </div>

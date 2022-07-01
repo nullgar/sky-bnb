@@ -33,23 +33,6 @@ const EditLocation = ({hideForm}) => {
 
     useEffect(() => {
         const errors = [];
-        if (name.length < 3) {
-            errors.push(`Location's Name must be longer than 3 characters!`)
-        } else if (name.length > 100) {
-            errors.push(`Location's Name must be longer than 100 characters!`)
-        }
-        if (address.length <= 1) {
-            errors.push(`Location's Address cannot be empty!`)
-        }
-        if (city.length <= 1) {
-            errors.push(`Location's City cannot be empty!`)
-        }
-        if (country.length <= 1) {
-            errors.push(`Location's Country cannot be empty!`)
-        }
-        if (price <= 0) {
-            errors.push(`Location's Price connot be free!`)
-        }
 
         setValErrors(errors);
     }, [name, city, address, country, price]);
@@ -76,14 +59,23 @@ const EditLocation = ({hideForm}) => {
 
         let updatedLocation;
         updatedLocation = parseInt(location.id)
-        // console.log(updatedLocation)
-        await dispatch(updateLocation(data, backup));
-        let hide = document.querySelector('#hideEditLocation');
 
-        hide.className = 'hideEditLocation'
-        let button = document.querySelector('#locationEditButton');
 
-        button.innerHTML = 'Edit'
+        const res = await dispatch(updateLocation(data, backup))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setValErrors(data.errors);
+            });
+        // await dispatch(updateLocation(data, backup));
+        if (res) {
+
+            let hide = document.querySelector('#hideEditLocation');
+
+            hide.className = 'hideEditLocation'
+            let button = document.querySelector('#locationEditButton');
+
+            button.innerHTML = 'Edit Location'
+        }
 
 
     };
@@ -95,8 +87,8 @@ const EditLocation = ({hideForm}) => {
         return (
         <div className='hideEditLocation' id='hideEditLocation'>
             <ul>
-                {valErrors.map(err => (
-                    <li key={err}>{err}</li>
+                {valErrors.map((err, i)=> (
+                    <li key={i}>{err}</li>
                 ))}
             </ul>
             <form>

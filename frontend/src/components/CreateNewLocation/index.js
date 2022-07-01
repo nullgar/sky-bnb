@@ -45,6 +45,7 @@ function CreateNewLocation() {
             });
         if (res) history.push(`/`)
     };
+
     if (!sessionUser) return history.push('/')
     return (
         <div>

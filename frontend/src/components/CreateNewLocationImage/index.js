@@ -25,9 +25,9 @@ const CreateNewLocationImage = () => {
     // Example
     useEffect(() => {
         const errors = [];
-        if (image.length <= 0) {
-          errors.push("Please provide a link for the image")
-        }
+        // if (image.length <= 0) {
+        //   errors.push("Please provide a link for the image")
+        // }
 
         setValErrors(errors);
     }, [image])
@@ -41,8 +41,11 @@ const CreateNewLocationImage = () => {
         //locationId
         //url
 
-        await dispatch(createImage(data, backup));
-
+        const res = await dispatch(createImage(data, backup))
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) setValErrors(data.errors);
+        });
     }
 
     if(images !== undefined)
