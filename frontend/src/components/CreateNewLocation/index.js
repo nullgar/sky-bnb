@@ -17,33 +17,10 @@ function CreateNewLocation() {
     const [valErrors, setValErrors] = useState([]);
 
 
-    useEffect(() => {
-        const errors = [];
-        if (name.length < 3) {
-            errors.push(`Location's Name must be longer than 3 characters!`)
-        } else if (name.length > 100) {
-            errors.push(`Location's Name must be longer than 100 characters!`)
-        }
-        if (address.length <= 1) {
-            errors.push(`Location's Address cannot be empty!`)
-        }
-        if (city.length <= 1) {
-            errors.push(`Location's City cannot be empty!`)
-        }
-        if (country.length <= 1) {
-            errors.push(`Location's Country cannot be empty!`)
-        }
-        if (price <= 0) {
-            errors.push(`Location's Price connot be free!`)
-        }
-
-        setValErrors(errors);
-    }, [name, city, address, country, price]);
-
     const formSubmit = async (e) => {
-        const userId = (parseInt(sessionUser.id))
         e.preventDefault();
         setValErrors([]);
+        const userId = (parseInt(sessionUser.id))
         const data = {
             userId,
             name,
@@ -53,17 +30,23 @@ function CreateNewLocation() {
             price
         }
 
-        let newLocation;
-        newLocation = await dispatch(createLocation(data));
-        history.push(`/`)
+
+
+
+        const res = await dispatch(createLocation(data))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setValErrors(data.errors);
+            });
+        if (res) history.push(`/`)
     };
     if (!sessionUser) return history.push('/')
     return (
         <div>
             <h1>Create a new location</h1>
             <ul>
-                {valErrors.map(err => (
-                    <li key={err}>{err}</li>
+                {valErrors.map((err, i) => (
+                    <li key={i}>{err}</li>
                 ))}
             </ul>
             <form onSubmit={formSubmit}>
