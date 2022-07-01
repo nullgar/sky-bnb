@@ -22,8 +22,13 @@ function Navigation({ isLoaded }){
   }
     return (
       <div>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
+        <div>
+          SkyBNB
+        </div>
+        <div>
+          <NavLink exact to="/">Home</NavLink>
+          {isLoaded && sessionLinks}
+        </div>
       </div>
     );
   }

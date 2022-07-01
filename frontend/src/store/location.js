@@ -57,13 +57,14 @@ export const getLocation = (id) => async dispatch => {
 };
 
 export const createLocation = (data) => async dispatch => {
+    // const {userId, name, address, city, country, price} = data;
 
-    const res = await csrfFetch(`/api/location`, {
+    const res = await csrfFetch(`/api/location/`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     });
-    //console.log(data)
+
     if (res.ok) {
         const location = await res.json();
         dispatch(create(location));
@@ -72,7 +73,7 @@ export const createLocation = (data) => async dispatch => {
 };
 
 export const updateLocation = (data, locationId) => async dispatch => {
-    console.log(locationId)
+
     const res = await csrfFetch(`/api/location/${locationId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},

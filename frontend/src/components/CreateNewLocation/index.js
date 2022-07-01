@@ -8,65 +8,70 @@ function CreateNewLocation() {
     //const newLocation = useSelector(state => state.location)
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory();
-    const [cookies, setCookies] = useState('cookie');
-    // const [userId, setUserId] = useState();
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
-    const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [price, setPrice] = useState(0);
-    const dispatch = useDispatch();
+    const [valErrors, setValErrors] = useState([]);
 
-    // useEffect(() => {
-    //     dispatch(getLocations())
-    // }, [dispatch])
 
+    useEffect(() => {
+        const errors = [];
+        setValErrors(errors);
+    }, [name, city, address, country, price]);
 
     const formSubmit = async (e) => {
-        const userId = (parseInt(sessionUser.id))
         e.preventDefault();
-
+        setValErrors([]);
+        const userId = (parseInt(sessionUser.id))
         const data = {
             userId,
             name,
             address,
             city,
-            state,
             country,
             price
         }
 
-        let newLocation;
-        newLocation = await dispatch(createLocation(data));
-        history.push(`/`)
+
+
+
+        const res = await dispatch(createLocation(data))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setValErrors(data.errors);
+            });
+        if (res) history.push(`/`)
     };
+
     if (!sessionUser) return history.push('/')
     return (
         <div>
             <h1>Create a new location</h1>
+            <ul>
+                {valErrors.map((err, i) => (
+                    <li key={i}>{err}</li>
+                ))}
+            </ul>
             <form onSubmit={formSubmit}>
-
-                {/* <input type='hidden' value={userId} /> */}
                 <label>Name: </label>
-                <input type='text' name='name' onChange={(e) => setName(e.target.value)} value={name}></input>
+                <input type='text' name='name' onChange={(e) => setName(e.target.value)} value={name} required='required'></input>
 
                 <label>Address: </label>
-                <input type='text' name='address' onChange={(e) => setAddress(e.target.value)} value={address}></input>
+                <input type='text' name='address' onChange={(e) => setAddress(e.target.value)} value={address} required='required'></input>
 
                 <label>City: </label>
-                <input type='text' name='city' onChange={(e) => setCity(e.target.value)} value={city}></input>
-
-                <label>State: </label>
-                <input type='text' name='state' onChange={(e) => setState(e.target.value)} value={state}></input>
+                <input type='text' name='city' onChange={(e) => setCity(e.target.value)} value={city} required='required'></input>
 
                 <label>Country: </label>
-                <input type='text' name='country' onChange={(e) => setCountry(e.target.value)} value={country}></input>
+                <input type='text' name='country' onChange={(e) => setCountry(e.target.value)} value={country} required='required'></input>
 
                 <label>Price: </label>
-                <input type='text' name='price' onChange={(e) => setPrice(e.target.value)} value={price}></input>
+                <input type='text' name='price' onChange={(e) => setPrice(e.target.value)} value={price} required='required'></input>
 
-                <button type='submit'>Submit Form</button>
+                <button type='submit' disabled={!!valErrors.length}>Submit Form</button>
             </form>
         </div>
     )

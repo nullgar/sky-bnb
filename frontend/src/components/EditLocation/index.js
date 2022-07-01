@@ -11,79 +11,73 @@ const EditLocation = ({hideForm}) => {
     const location = useSelector(state => {
         return state.location[locationId];
     });
-
     const user = useSelector(state => {
        return state.session.user.id
     });
 
-
-
     const backupInfo = useLocation();
     const backup = parseInt(backupInfo.pathname.split('/')[2])
-    // location.id === undefined ? location.id = backup : null;
-
     const sessionUser = useSelector(state => state.session.user);
 
     //edit form
     const [name, setName] = useState(location ? location.name : '');
     const [address, setAddress] = useState(location ? location.address : '');
     const [city, setCity] = useState(location ? location.city : '');
-    const [state, setState] = useState(location ? location.state : '');
     const [country, setCountry] = useState(location ? location.country : '');
     const [price, setPrice] = useState(location ? location.price : '');
+    const [valErrors, setValErrors] = useState([]);
 
     useEffect(() => {
         dispatch(getLocations())
     }, [dispatch])
 
+    useEffect(() => {
+        const errors = [];
+
+        setValErrors(errors);
+    }, [name, city, address, country, price]);
 
     const updateName = (e) => setName(e.target.value);
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
-    const updateState = (e) => setState(e.target.value);
     const updateCountry = (e) => setCountry(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
 
     const handleSubmit = async (e) => {
        e.preventDefault();
        const userId = user
+       setValErrors([]);
 
-       console.log(backup)
-        e.preventDefault();
         const data = {
             userId,
             name,
             address,
             city,
-            state,
             country,
             price
         }
 
         let updatedLocation;
         updatedLocation = parseInt(location.id)
-        // console.log(updatedLocation)
-        await dispatch(updateLocation(data, backup));
-        let hide = document.querySelector('#hideEditLocation');
 
-        hide.className = 'hideEditLocation'
-        let button = document.querySelector('#locationEditButton');
 
-        button.innerHTML = 'Edit'
+        const res = await dispatch(updateLocation(data, backup))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setValErrors(data.errors);
+            });
+        // await dispatch(updateLocation(data, backup));
+        if (res) {
 
-        //this made it seem dynamic
-        // let nameField = document.querySelector('#locationDisplayName');
-        // nameField.innerHTML = name
-        // let addressField = document.querySelector('#locationDisplayAddress');
-        // addressField.innerHTML = address
-        // let cityField = document.querySelector('#locationDisplayCity');
-        // cityField.innerHTML = `${city}, ${state}, ${country}`
-        // let costField = document.querySelector('#locationDisplayCost');
-        // costField.innerHTML = price
+            let hide = document.querySelector('#hideEditLocation');
 
-        // let nameField = document.querySelector('#locationDisplayName');
-        // nameField.innerHTML = name
-        // history.push(`/location/${updatedLocation}`)
+            hide.className = 'hideEditLocation'
+            let button = document.querySelector('#locationEditButton');
+
+            button.innerHTML = 'Edit Location'
+        }
+
+
     };
 
 
@@ -92,26 +86,28 @@ const EditLocation = ({hideForm}) => {
     } else if (Object.values(location)) {
         return (
         <div className='hideEditLocation' id='hideEditLocation'>
-        <form>
-        <label>Name: </label>
-        <input type='text' name='name' onChange={updateName} value={name}></input>
+            <ul>
+                {valErrors.map((err, i)=> (
+                    <li key={i}>{err}</li>
+                ))}
+            </ul>
+            <form>
+                <label>Name: </label>
+                <input type='text' name='name' onChange={updateName} value={name}></input>
 
-        <label>Address: </label>
-        <input type='text' name='address' onChange={updateAddress} value={address}></input>
+                <label>Address: </label>
+                <input type='text' name='address' onChange={updateAddress} value={address}></input>
 
-        <label>City: </label>
-        <input type='text' name='city' onChange={updateCity} value={city}></input>
+                <label>City: </label>
+                <input type='text' name='city' onChange={updateCity} value={city}></input>
 
-        <label>State: </label>
-        <input type='text' name='state' onChange={updateState} value={state}></input>
+                <label>Country: </label>
+                <input type='text' name='country' onChange={updateCountry} value={country}></input>
 
-        <label>Country: </label>
-        <input type='text' name='country' onChange={updateCountry} value={country}></input>
-
-        <label>Price: </label>
-        <input type='text' name='price' onChange={updatePrice} value={price}></input>
-        <button onClick={handleSubmit}>submit</button>
-        </form>
+                <label>Price: </label>
+                <input type='text' name='price' onChange={updatePrice} value={price}></input>
+                <button onClick={handleSubmit} disabled={!!valErrors.length}>submit</button>
+            </form>
 
         </div>
     )

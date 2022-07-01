@@ -36,7 +36,6 @@ export const createImage = (data) => async dispatch => {
 
     if (res.ok) {
         const image = await res.json();
-        console.log('image in createImage------',image)
         dispatch(create(image));
         return image;
     }

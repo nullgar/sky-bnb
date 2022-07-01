@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import reviewReducer, { createReview, getReviews } from '../../store/review';
+import { createReview, getReviews } from '../../store/review';
 
 const CreateNewReview = () => {
     const dispatch = useDispatch();
@@ -11,6 +11,13 @@ const CreateNewReview = () => {
 
 
     const [review, setReview] = useState('');
+    const [valErrors, setValErrors] = useState([]);
+
+    useEffect(() => {
+        const errors = [];
+
+        setValErrors(errors);
+    }, [review])
 
     const submitReview = async (e) => {
         const userId = (parseInt(sessionUser.id));
@@ -22,20 +29,27 @@ const CreateNewReview = () => {
             review
         };
 
-        let newReview;
-        newReview = await dispatch(createReview(data))
 
+        const res = await dispatch(createReview(data))
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) setValErrors(data.errors);
+        });
+        if (res) {
+            setReview('')
+        }
     }
-    // useEffect(() => {
-    //   dispatch(getReviews())
 
-    // }, [review]);
 
     return (
         <form>
-            <label></label>
-            <textarea type='text' name='review' value={review} onChange={(e) => setReview(e.target.value)} ></textarea>
-            <button onClick={submitReview}>Submit Review</button>
+            <ul>
+                {valErrors.map((err, i) => (
+                    <li key={i}>{err}</li>
+                ))}
+            </ul>
+            <textarea type='text' name='review' value={review} onChange={(e) => setReview(e.target.value)} id='reviewTextArea' ></textarea>
+            <button onClick={submitReview} disabled={!!valErrors.length} >Submit Review</button>
         </form>
     )
 }

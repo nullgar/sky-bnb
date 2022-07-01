@@ -12,15 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      unique: true
     },
     city: {
       type: DataTypes.STRING(100),
       allowNull: false
-    },
-    state: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
     },
     country: {
       type: DataTypes.STRING(50),

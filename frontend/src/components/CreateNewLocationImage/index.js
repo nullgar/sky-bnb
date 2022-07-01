@@ -7,6 +7,7 @@ import { createImage, getImages } from '../../store/images';
 
 const CreateNewLocationImage = () => {
     const [image, setImage] = useState('');
+    const [valErrors, setValErrors] = useState([]);
     const { locationId } = useParams();
     const dispatch = useDispatch();
     const backupInfo = useLocation();
@@ -21,6 +22,16 @@ const CreateNewLocationImage = () => {
         dispatch(getImages(backup));
     }, [dispatch])
 
+    // Example
+    useEffect(() => {
+        const errors = [];
+        // if (image.length <= 0) {
+        //   errors.push("Please provide a link for the image")
+        // }
+
+        setValErrors(errors);
+    }, [image])
+
     const addLocationImage = async (e) => {
         e.preventDefault();
         const data = {
@@ -30,16 +41,24 @@ const CreateNewLocationImage = () => {
         //locationId
         //url
 
-        await dispatch(createImage(data, backup));
-
+        const res = await dispatch(createImage(data, backup))
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) setValErrors(data.errors);
+        });
     }
 
     if(images !== undefined)
     {
     return (
         <div>
+            <ul>
+                {valErrors.map(err => (
+                    <li key={err}>{err}</li>
+                ))}
+            </ul>
             <input type='text' value={image} onChange={(e) => setImage(e.target.value)} placeholder='Pleae Enter Image Url'></input>
-            <button onClick={addLocationImage}>Add Image</button>
+            <button onClick={addLocationImage} disabled={!!valErrors.length} >Add Image</button>
 
 
         </div>

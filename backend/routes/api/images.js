@@ -8,6 +8,16 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
+const validateImages = [
+    check('url')
+        .exists()
+        .withMessage('Url cannot be empty.')
+        .matches(/^((.jpg)|(.jpeg)|(.png)|(.svg))$/)
+        .withMessage('Url needs to end in .jpg, .jpeg, .png, or .svg.')
+        .isLength({min: 3, max: 250})
+        .withMessage('Url needs to be 3 - 250 characters.'),
+    handleValidationErrors
+];
 
 router.get('/:locationId', asyncHandler(async function(req, res) {
     const { locationId } = req.params;
@@ -16,7 +26,7 @@ router.get('/:locationId', asyncHandler(async function(req, res) {
     return res.json(images);
 }));
 
-router.post('/', asyncHandler(async function(req, res) {
+router.post('/', validateImages, asyncHandler(async function(req, res) {
     const image = await Image.create(req.body);
     return res.json(image);
 }));

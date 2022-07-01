@@ -8,6 +8,14 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
+const validateReviews = [
+    check('review')
+        .exists()
+        .withMessage('Review cannot be empty.')
+        .isLength({ max: 250})
+        .withMessage('Url needs to be less than 250 characters.'),
+    handleValidationErrors
+];
 
 router.get('/:locationId', asyncHandler(async function(req, res) {
     const { locationId } = req.params;
@@ -16,7 +24,7 @@ router.get('/:locationId', asyncHandler(async function(req, res) {
     return res.json(review);
 }));
 
-router.post('/', asyncHandler(async function(req, res) {
+router.post('/', validateReviews, asyncHandler(async function(req, res) {
     const review = await Review.create(req.body);
 
     return res.json(review);
