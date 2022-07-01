@@ -88,7 +88,7 @@ export const updateLocation = (data, locationId) => async dispatch => {
 }
 
 export const removeLocation = (locationId, userId) => async dispatch => {
-    // console.log('data', data)
+
     const res = await csrfFetch(`/api/location/${locationId}`, {
       method: 'DELETE'
     })
@@ -104,7 +104,7 @@ const locationReducer = (state = [], action) => {
     const allLocations = {};
     switch (action.type) {
         case GET:
-            // action.locations.forEach(location => console.log(location))
+
             action.locations.forEach(location => {
             state[location.id] = location;
             });
@@ -128,7 +128,7 @@ const locationReducer = (state = [], action) => {
         case UPDATE:
 
             const updateState = {...state}
-            // console.log(updateState)
+
             Object.values(updateState).map(review => {
                 if (review.id === action.location.id) {
                     updateState[action.location.id] = action.location.location

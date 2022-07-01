@@ -25,7 +25,7 @@ export const getReviews = (locationId) => async dispatch => {
 
     if (res.ok) {
         const reviews = await res.json();
-        // console.log('this is it---- ', reviews)
+
         dispatch(getLocationReviews(reviews));
         return reviews;
     }
@@ -47,14 +47,14 @@ export const createReview = (data) =>async dispatch => {
 };
 
 export const removeReview = (reviewId, userId) => async dispatch => {
-    // console.log('review---', reviewId, 'location---', locationId, 'user----', userId);
+
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     });
 
     if (res.ok) {
         const deletedReview = await res.json();
-        console.log('this is what the fetch returne', deletedReview)
+
         dispatch(remove(deletedReview, userId));
         return deletedReview;
     }

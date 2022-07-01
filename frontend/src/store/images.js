@@ -20,7 +20,7 @@ export const getImages = (locationId) => async dispatch => {
 
     if (res.ok) {
         const images = await res.json();
-        // console.log('this is it---- ', images)
+
         dispatch(getLocationImages(images));
         return images;
     }
