@@ -17,6 +17,11 @@ function CreateNewLocation() {
     const [valErrors, setValErrors] = useState([]);
 
 
+    useEffect(() => {
+        const errors = [];
+        setValErrors(errors);
+    }, [name, city, address, country, price]);
+
     const formSubmit = async (e) => {
         e.preventDefault();
         setValErrors([]);
