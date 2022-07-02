@@ -23,7 +23,7 @@ function MainPage() {
 
   return (
     <div>
-        Main Page
+
         <LocationsDisplay />
     </div>
   );

@@ -24,7 +24,7 @@ function Navigation({ isLoaded }){
       <div className='sessionLinksDiv'>
         <NavLink to="/login" className='sessionLinks'>Log In</NavLink>
         <NavLink to="/signup" className='sessionLinks'>Sign Up</NavLink>
-        <button onClick={demoUserLogin}>Demo User</button>
+        <button onClick={demoUserLogin} className='demoUserButton'>Demo User</button>
       </div>
     );
   }
