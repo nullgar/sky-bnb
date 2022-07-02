@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { User, Location } = require('../../db/models');
+const { User, Location, Image } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -42,7 +42,9 @@ const validateLocation = [
 
 
 router.get('/', asyncHandler(async function(req, res) {
-    const locations = await Location.findAll();
+    const locations = await Location.findAll({
+        include: { model: Image, as: 'Images' }
+    });
     return res.json(locations);
 }));
 
