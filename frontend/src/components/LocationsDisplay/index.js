@@ -14,7 +14,7 @@ function LocationsDisplay() {
 
 
   useEffect(() => {
-    dispatch(getLocations())
+    dispatch(getLocations());
   }, [dispatch, user])
 
     if(!locations) {
@@ -26,7 +26,7 @@ function LocationsDisplay() {
         {user !== undefined && user !== null ? <Link to='/location/new'>Create New Location</Link> : null}
         {locations ? locations.map(location => (
           // this fixed the re render issue but why
-            <div key={location.id + 7}>
+            <div key={location.id + 7} className='mainPageDisplayDivs'>
 
                 <h1>
                     <Link to={`/location/${location.id}`}> {location.name} </Link>

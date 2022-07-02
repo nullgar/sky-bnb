@@ -1,0 +1,13 @@
+.mainIdexPageMasterDiv {
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.mainPageDisplayDivs {
+    display: 1;
+    padding: 10%;
+}
