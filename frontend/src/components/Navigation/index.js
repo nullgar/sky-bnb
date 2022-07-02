@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import * as sessionActions from '../../store/session'
 import './Navigation.css';
 
+
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -20,20 +21,20 @@ function Navigation({ isLoaded }){
     );
   } else {
     sessionLinks = (
-      <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+      <div className='sessionLinksDiv'>
+        <NavLink to="/login" className='sessionLinks'>Log In</NavLink>
+        <NavLink to="/signup" className='sessionLinks'>Sign Up</NavLink>
         <button onClick={demoUserLogin}>Demo User</button>
-      </>
+      </div>
     );
   }
     return (
-      <div>
-        <div>
-          SkyBNB
+      <div className='mainNavigationBar'>
+        <div className='logoDiv'>
+          <img src='https://i.imgur.com/8E7XT9Z.png' className='logo' />
         </div>
-        <div>
-          <NavLink exact to="/">Home</NavLink>
+        <div className='userButtonsMainPage'>
+          <NavLink exact to="/" className='homeSessionLink' id='profileHome'>Home</NavLink>
           {isLoaded && sessionLinks}
         </div>
       </div>

@@ -15,11 +15,20 @@ function ProfileButton({ user }) {
     if (!showMenu) return;
 
     const closeMenu = () => {
+      let button = document.querySelector('#profileButton');
+      let home = document.querySelector('#profileHome');
+      button.className = 'inactiveButton';
+      home.className = 'homeSessionLink'
       setShowMenu(false);
     };
 
     document.addEventListener('click', closeMenu);
-
+    let button = document.querySelector('#profileButton');
+    if (button.className === 'inactiveButton')
+    { button.className = 'activeButton' }
+    let home = document.querySelector('#profileHome');
+    if (home.className === 'homeSessionLink');
+    home.className = 'activeHomeSessionLink'
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
@@ -31,7 +40,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button onClick={openMenu} className='inactiveButton' id='profileButton'>
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (

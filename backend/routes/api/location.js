@@ -23,7 +23,9 @@ const validateLocation = [
         .exists()
         .withMessage('Price cannot be empty.')
         .matches(/\d+/)
-        .withMessage('Price needs to be a number!'),
+        .withMessage('Price needs to be a number!')
+        .matches(/^[1-9]\d*$/)
+        .withMessage('Price needs to be higher than 0'),
     check('city')
         .exists()
         .withMessage('Please provide the locations City.')
@@ -33,10 +35,7 @@ const validateLocation = [
         .exists()
         .withMessage('Please provide the locations Country.')
         .isLength({ min: 5, max: 50 })
-        .withMessage('City needs to be between 5 - 100 characters.'),
-    check('price')
-        .exists()
-        .withMessage('Please provide a Price.'),
+        .withMessage('Country needs to be between 5 - 100 characters.'),
 
     handleValidationErrors
 ];

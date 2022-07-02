@@ -1,0 +1,59 @@
+.mainNavigationBar {
+    display: flex;
+    height: 10%;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
+}
+.logoDiv {
+    /* left: 10px; */
+}
+.logo {
+    object-fit: contain;
+    max-width: 50%;
+    max-height: 50%;
+    padding-left: 35%;
+    /* background-repeat: no-repeat; */
+}
+.userButtonsMainPage {
+    display: flex;
+
+    /* height: 40px; */
+    padding-right: 5%;
+}
+.sessionLinksDiv {
+    display: flex;
+    /* margin: 20%; */
+}
+.sessionLinks {
+    font-size: 16px;
+    text-decoration: none;
+    margin: 7%;
+}
+
+.profile-dropdown {
+
+}
+/* image {
+    height: 100px;
+    width: 100px;
+} */
+.homeSessionLink{
+    font-size: 16px;
+    text-decoration: none;
+    margin: 7%;
+    color: red;
+}
+.activeHomeSessionLink {
+    color: blue;
+    margin-top: 13%;
+    margin-right: 3%;
+}
+.inactiveButton{
+    color: blue;
+}
+.activeButton {
+    margin-top: 10%;
+    color: red;
+    height: 50%;
+}

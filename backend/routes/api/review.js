@@ -10,7 +10,7 @@ const router = express.Router();
 
 const validateReviews = [
     check('review')
-        .exists()
+        .notEmpty()
         .withMessage('Review cannot be empty.')
         .isLength({ max: 250})
         .withMessage('Url needs to be less than 250 characters.'),

@@ -129,7 +129,7 @@ const locationReducer = (state = [], action) => {
 
             const updateState = {...state}
 
-            Object.values(updateState).map(review => {
+            Object.values(updateState).forEach(review => {
                 if (review.id === action.location.id) {
                     updateState[action.location.id] = action.location.location
                 }
