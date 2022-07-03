@@ -1,0 +1,20 @@
+.newImageUl {
+    list-style: none;
+}
+
+.newImageLi {
+    margin: 1%;
+    color: red;
+}
+
+.newImageInput {
+    width: 70%;
+    margin-left: 1%;
+}
+
+.newImageButton {
+    margin: 5% 0 5% 5%;
+    /* margin-left: 5%; */
+    border-radius: 20px;
+    border: 2px solid #DDDDDD;
+}

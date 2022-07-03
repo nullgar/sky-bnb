@@ -91,31 +91,28 @@ const EditLocation = ({hideForm}) => {
                     <li key={i}>{err}</li>
                 ))}
             </ul>
-            <form>
-                <label>Name: </label>
-                <input type='text' name='name' onChange={updateName} value={name}></input>
+            <form className='showEditLocation'>
+                <label className='showEditLabel'>Name: </label>
+                <input className='showEditInput' type='text' name='name' onChange={updateName} value={name}></input>
 
-                <label>Address: </label>
-                <input type='text' name='address' onChange={updateAddress} value={address}></input>
+                <label className='showEditLabel'>Address: </label>
+                <input className='showEditInput' type='text' name='address' onChange={updateAddress} value={address}></input>
 
-                <label>City: </label>
-                <input type='text' name='city' onChange={updateCity} value={city}></input>
+                <label className='showEditLabel'>City: </label>
+                <input className='showEditInput' type='text' name='city' onChange={updateCity} value={city}></input>
 
-                <label>Country: </label>
-                <input type='text' name='country' onChange={updateCountry} value={country}></input>
+                <label className='showEditLabel'>Country: </label>
+                <input className='showEditInput' type='text' name='country' onChange={updateCountry} value={country}></input>
 
-                <label>Price: </label>
-                <input type='text' name='price' onChange={updatePrice} value={price}></input>
-                <button onClick={handleSubmit} disabled={!!valErrors.length}>submit</button>
+                <label className='showEditLabel'>Price: </label>
+                <input className='showEditInput' type='text' name='price' onChange={updatePrice} value={price}></input>
+                <button onClick={handleSubmit} className='showEditButton' disabled={!!valErrors.length}>submit</button>
             </form>
 
         </div>
     )
     } else {
-        return (
-            <h1>You can't be here! Please go back home.</h1>
-
-        )
+        return <h1>Not Allowed</h1>
     }
 }
 

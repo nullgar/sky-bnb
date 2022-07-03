@@ -1,0 +1,39 @@
+.locationMasterDiv {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.locationHeader {
+    padding: 2%;
+    color: red;
+}
+
+.locationInfo {
+    margin: 2%;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+    /* display: flex; */
+    color: black;
+}
+
+.locationEditButton {
+    color: black;
+    margin: 2% 0 2% 0;
+    width: 7vw;
+    height: 5vh;
+    /* margin-left: 5%; */
+    border-radius: 20px;
+    border: 2px solid #DDDDDD;
+}
+.locationEditDelete {
+    color: black;
+    margin: 2% 0 2% 0;
+    width: 7vw;
+    height: 5vh;
+    /* margin-left: 5%; */
+    border-radius: 20px;
+    border: 2px solid #DDDDDD;
+}

@@ -4,7 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { getImages } from '../../store/images';
 import { getLocation, getLocations } from '../../store/location';
 import CreateNewLocationImage from '../CreateNewLocationImage';
-
+import './LocationImages.css'
 
 
 const LocationImages = () => {
@@ -36,7 +36,7 @@ const LocationImages = () => {
 
             {Object.values(images).map(image => (
                 <div key={image.id + 7}>
-                    <img src={image.url} />
+                    <img src={image.url} className='locationImages' />
                 </div>
             ))}
             {user && user.id === location.userId ? <CreateNewLocationImage /> : null}
