@@ -15,6 +15,11 @@ module.exports = {
      review: "Danm Skeevers ate my sweetroll",
     },
     {
+      userId: 3,
+      locationId: 2,
+      review: "My legs froze 10/10 would recommend!",
+     },
+    {
     userId: 2,
      locationId: 2,
      review: "Hulda is mean!",
