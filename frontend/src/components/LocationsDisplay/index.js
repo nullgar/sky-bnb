@@ -23,18 +23,18 @@ function LocationsDisplay() {
     } else {
     return (
         <>
-        {user !== undefined && user !== null ? <Link to='/location/new'>Create New Location</Link> : null}
+        {user !== undefined && user !== null ? <Link to='/location/new' className='mainPageDisplayCreateButton' >Become a Host</Link> : null}
 
         { locations.map(location => (
 
           // this fixed the re render issue but why
             <div key={location.id + 7} className='mainPageDisplayDivs'>
               {console.log(location.id)}
-                <h1>
-                    <Link to={`/location/${location.id}`}> {location.name} </Link>
+                <h1 className='mainPageDisplayHeader' >
+                    <Link to={`/location/${location.id}`} className='mainPageDisplayLink'> {location.name} </Link>
                 </h1>
-                { location.Images[0] ? <img src={location.Images[0].url} className='mainPageDisplayDivsImage' /> : null}
-                <p>
+                { location.Images[0] ? <Link to={`/location/${location.id}`} ><img src={location.Images[0].url}  className='mainPageDisplayDivsImage' /> </Link> : null}
+                <p className='mainPageDisplayInfo'>
                     {location.city}, {location.country}
                 </p>
             </div>

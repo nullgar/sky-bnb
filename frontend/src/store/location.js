@@ -108,7 +108,7 @@ const locationReducer = (state = [], action) => {
             action.locations.forEach(location => {
             listLocation[location.id] = location;
             });
-            console.log(listLocation);
+
             return listLocation;
         case CREATE:
             Object.values(action.location).forEach(location => {
@@ -133,7 +133,7 @@ const locationReducer = (state = [], action) => {
                 }
 
             });
-            console.log(updateState)
+
             return updateState
 
 

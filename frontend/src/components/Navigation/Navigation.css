@@ -5,6 +5,8 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
+    position: sticky;
+    top: 0;
 }
 .logoDiv {
     display: flex;
@@ -62,7 +64,7 @@
     margin-right: 30px;
 }
 .inactiveButton{
-    color: #FF385C;
+    color: black;
     height: 50px;
     width: 50px;
     border-radius: 50px;
@@ -70,14 +72,14 @@
 }
 .activeButton {
 
-    color: #FF385C;
+    color: black;
     height: 50px;
     width: 50px;
     border-radius: 60px;
 }
 
 .demoUserButton {
-    color: #FF385C;
+    color: black;
     margin-top: 4%;
     margin-right: 3%;
     font-weight: bold;
