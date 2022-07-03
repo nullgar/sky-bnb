@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { createImage, getImages } from '../../store/images';
-
+import './CreateNewLocationImage.css'
 
 
 const CreateNewLocationImage = () => {
@@ -25,9 +25,7 @@ const CreateNewLocationImage = () => {
     // Example
     useEffect(() => {
         const errors = [];
-        // if (image.length <= 0) {
-        //   errors.push("Please provide a link for the image")
-        // }
+
 
         setValErrors(errors);
     }, [image])
@@ -38,8 +36,7 @@ const CreateNewLocationImage = () => {
             locationId: backup,
             url: image
         };
-        //locationId
-        //url
+
 
         const res = await dispatch(createImage(data, backup))
         .catch(async (res) => {
@@ -51,14 +48,14 @@ const CreateNewLocationImage = () => {
     if(images !== undefined)
     {
     return (
-        <div>
-            <ul>
+        <div className='createNewImageDiv'>
+            <ul className='newImageUl'>
                 {valErrors.map(err => (
-                    <li key={err}>{err}</li>
+                    <li key={err} className='newImageLi'>{err}</li>
                 ))}
             </ul>
-            <input type='text' value={image} onChange={(e) => setImage(e.target.value)} placeholder='Pleae Enter Image Url'></input>
-            <button onClick={addLocationImage} disabled={!!valErrors.length} >Add Image</button>
+            <input type='text' className='newImageInput' value={image} onChange={(e) => setImage(e.target.value)} placeholder='Please Enter Image Url'></input>
+            <button className='newImageButton' onClick={addLocationImage} disabled={!!valErrors.length} >Add Image</button>
 
 
         </div>

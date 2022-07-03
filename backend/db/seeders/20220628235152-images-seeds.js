@@ -19,7 +19,7 @@ module.exports = {
      },
      {
       locationId: 1,
-      url: 'https://static.wikia.nocookie.net/elderscrolls/images/c/c5/Bed.png'
+      url: 'https://static1.srcdn.com/wordpress/wp-content/uploads/2021/07/Skyrim-The-Chill-Secret-Location.jpg'
      }
   ], {});
   },

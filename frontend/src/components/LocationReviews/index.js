@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getReviews, removeReview } from '../../store/review';
 import CreateNewReview from '../CreateNewReview';
-
+import './LocationReviews.css'
 
 
 const LocationReviews = () => {
@@ -21,7 +21,6 @@ const LocationReviews = () => {
 
     const reviewDelete = (e) => {
         const reviewId = parseInt(e.target.id);
-        // const locationIdReview = parseInt(locationId);
         const userReviewId = parseInt(sessionUser.id);
         dispatch(removeReview(reviewId, userReviewId));
     };
@@ -29,18 +28,24 @@ const LocationReviews = () => {
     if (reviews && sessionUser) {
 
 
+
+
     return (
-        <div>
-            Reviews Go Here
+        <div className='locationReviewsMasterDiv'>
+            <h3 className='locationReviewsHeader'>Reviews</h3>
             {reviews.map(review => (
-                <div key={review.id}>
-                    <p>{review.review}</p>
-                    {review.userId === sessionUser.id ? <button onClick={reviewDelete} id={review.id}>delete</button> : null}
+                <div key={review.id + 20}>
+                <div key={review.id + 20} className='locationReviewDiv'>
+                    {review.User && review.User.username !== undefined ? <p className='locationReviewsUser'>{review.User.username}: </p> : null}
+                    <p className='locationReviewsReview' >{review.review}</p>
+                </div>
+                    {review.userId === sessionUser.id ? <button onClick={reviewDelete} id={review.id} className='locationReviewsDelete' >Delete</button> : null}
                 </div>
             ))}
             <CreateNewReview />
         </div>
     )
+
 
     } else {
         return (

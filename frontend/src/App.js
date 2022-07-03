@@ -26,9 +26,6 @@ function App() {
           <Route exact path="/">
             <MainPage />
           </Route>
-          {/* <Route exact path="/location">
-            <Location />
-          </Route> */}
           <Route exact path="/location/new">
             <CreateNewLocation />
           </Route>

@@ -1,0 +1,48 @@
+.locationReviewsMasterDiv {
+    display: flex;
+    flex-flow: column;
+}
+.locationReviewsHeader {
+
+}
+.locationReviewDiv {
+    display: flex;
+    align-items: center;
+
+    /* position: relative; */
+    margin: 5% 0 5% 0;
+    padding: 5% 0 5% 0;
+    width: 500px;
+    border: 1px solid #DDDDDD;
+    border-radius: 20px;
+}
+.locationReviewsUser {
+    font-style: italic;
+    padding: 4%;
+    margin-right: 20px;
+}
+.locationReviewsReview {
+
+    /* display: inline-block; */
+    overflow: scroll;
+    overflow-wrap: break-word;
+    /* position: relative; */
+    flex-wrap: wrap;
+    padding: 4%;
+    margin-right: 20px;
+
+}
+.locationReviewsDelete {
+
+    font-size: 13px;
+    color: red;
+
+    width: 125px;
+    height: 50px;
+
+    border-radius: 20px;
+    border: 2px solid #DDDDDD;
+
+    left: 80%;
+    margin-bottom: 10%;
+}

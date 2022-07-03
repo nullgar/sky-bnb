@@ -4,7 +4,7 @@ import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
 import { getLocation, getLocations, removeLocation } from '../../store/location';
 import EditLocation from '../EditLocation';
 import LocationImages from '../LocationImage/LocationImages';
-
+import './Location.css'
 import LocationReviews from '../LocationReviews';
 
 
@@ -25,7 +25,8 @@ function Location({hideForm}) {
 
   useEffect(() => {
     dispatch(getLocations())
-  }, [dispatch])
+  }, [dispatch]);
+
 
   const backupInfo = useLocation();
   const backup = parseInt(backupInfo.pathname.split('/')[2])
@@ -58,18 +59,18 @@ function Location({hideForm}) {
 
     if (!location) {
       return (
-        <h1>There is nothing herer</h1>
+       <h1>404 Page Not Found</h1>
       )
     } else if (location !== undefined) {
       return(
-      <div>
-        <h1 id='locationDisplayName'>{location.name}</h1>
+      <div className='locationMasterDiv'>
+        <h1 className='locationHeader'>{location.name}</h1>
         <LocationImages />
-        <p id='locationDisplayAddress'>Located at {location.address}</p>
-        <p id='locationDisplayCity'>{location.city}, {location.country}</p>
-        <p id='locationDisplayCost'>Cost per night ${location.price}</p>
-        {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton'>Edit Location</button>   : null}
-        {user && location.userId === user.id ? <button onClick={destroy}>Delete Location</button> : null}
+        <p className='locationInfo'>Located at {location.address}</p>
+        <p className='locationInfo'>{location.city}, {location.country}</p>
+        <p className='locationInfo'>Cost per night ${location.price}</p>
+        {user && location.userId === user.id ? <button onClick={editRedirect} id='locationEditButton' className='locationEditButton'>Edit Location</button>   : null}
+        {user && location.userId === user.id ? <button onClick={destroy} className='locationEditDelete'>Delete Location</button> : null}
         {user && location.userId === user.id ? <EditLocation /> : null}
         <LocationReviews />
       </div>

@@ -14,28 +14,30 @@ function LocationsDisplay() {
 
 
   useEffect(() => {
-    dispatch(getLocations())
+    dispatch(getLocations());
+
   }, [dispatch, user])
 
     if(!locations) {
       <h1>Nothing Loaded</h1>
     } else {
-
     return (
         <>
-        {user !== undefined && user !== null ? <Link to='/location/new'>Create New Location</Link> : null}
-        {locations ? locations.map(location => (
-          // this fixed the re render issue but why
-            <div key={location.id + 7}>
+        {user !== undefined && user !== null ? <Link to='/location/new' className='mainPageDisplayCreateButton' >Become a Host</Link> : null}
 
-                <h1>
-                    <Link to={`/location/${location.id}`}> {location.name} </Link>
+        { locations.map(location => (
+
+          // this fixed the re render issue but why
+            <div key={location.id + 7} className='mainPageDisplayDivs'>
+                <h1 className='mainPageDisplayHeader' >
+                    <Link to={`/location/${location.id}`} className='mainPageDisplayLink'> {location.name} </Link>
                 </h1>
-                <p>
+                { location.Images[0] ? <Link to={`/location/${location.id}`} > <img src={location.Images[0].url}  className='mainPageDisplayDivsImage' /> </Link> : <Link to={`/location/${location.id}`} > <img src={'https://downtownls.org/wp-content/uploads/coming-soon.jpg'}  className='mainPageDisplayDivsImage' /> </Link>}
+                <p className='mainPageDisplayInfo'>
                     {location.city}, {location.country}
                 </p>
             </div>
-        )): null}
+        ))}
         </>
     );
     }

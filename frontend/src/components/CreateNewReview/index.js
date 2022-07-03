@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createReview, getReviews } from '../../store/review';
+import './CreateNewReview.css';
 
 const CreateNewReview = () => {
     const dispatch = useDispatch();
@@ -42,14 +43,14 @@ const CreateNewReview = () => {
 
 
     return (
-        <form>
-            <ul>
+        <form className='CreateNewReviewForm'>
+            <ul className='CreateNewReviewUl'>
                 {valErrors.map((err, i) => (
-                    <li key={i}>{err}</li>
+                    <li key={i} className='CreateNewReviewLi' >{err}</li>
                 ))}
             </ul>
-            <textarea type='text' name='review' value={review} onChange={(e) => setReview(e.target.value)} id='reviewTextArea' ></textarea>
-            <button onClick={submitReview} disabled={!!valErrors.length} >Submit Review</button>
+            <textarea type='text' name='review' className='CreateNewReviewInput' value={review} onChange={(e) => setReview(e.target.value)} id='reviewTextArea' ></textarea>
+            <button onClick={submitReview} className='CreateNewReviewButton' disabled={!!valErrors.length} >Submit Review</button>
         </form>
     )
 }

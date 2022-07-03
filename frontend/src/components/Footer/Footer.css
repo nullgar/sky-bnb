@@ -1,0 +1,51 @@
+.footer {
+    display: flex;
+    background-color: #fff;
+    /* height: 10%; */
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: rgb(0 0 0 / 8%) 0 -1px 0;
+    position: sticky;
+    position: 0;
+    top: 0;
+    width: 100%;
+}
+
+.devFooter {
+    position: relative;
+    right: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.techFooter {
+    position: relative;
+    right: 100px;
+    margin-bottom: 20px;
+}
+
+.devLinks {
+    position: relative;
+    right: 100px;
+    margin-bottom: 20px;
+}
+
+.footerUl {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+
+.footerLi {
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* margin: 1% 0; */
+}
+.footerLink {
+    text-decoration: none;
+    font-style: italic;
+    font-weight: bold;
+}

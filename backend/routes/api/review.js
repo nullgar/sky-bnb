@@ -10,7 +10,7 @@ const router = express.Router();
 
 const validateReviews = [
     check('review')
-        .exists()
+        .notEmpty()
         .withMessage('Review cannot be empty.')
         .isLength({ max: 250})
         .withMessage('Url needs to be less than 250 characters.'),
@@ -20,14 +20,14 @@ const validateReviews = [
 router.get('/:locationId', asyncHandler(async function(req, res) {
     const { locationId } = req.params;
     const id = parseInt(locationId);
-    const review = await Review.findAll({where: { locationId: locationId }});
+    const review = await Review.findAll({where: { locationId: locationId }, include: { model: User, as: 'User'}});
     return res.json(review);
 }));
 
-router.post('/', validateReviews, asyncHandler(async function(req, res) {
+router.post('/:locationId', validateReviews, asyncHandler(async function(req, res) {
     const review = await Review.create(req.body);
-
-    return res.json(review);
+    const newReview = await Review.findOne({where: { id: review.id }, include: { model: User, as: 'User'}});
+    return res.json(newReview);
 }));
 
 router.delete('/:reviewId', asyncHandler(async function(req, res) {
