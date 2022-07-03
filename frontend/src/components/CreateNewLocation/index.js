@@ -2,7 +2,7 @@ import React, { useEffect, useState, useValue } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getLocations, createLocation } from '../../store/location';
-
+import './CreateNewLocation.css'
 function CreateNewLocation() {
 
     //const newLocation = useSelector(state => state.location)
@@ -48,30 +48,30 @@ function CreateNewLocation() {
 
     if (!sessionUser) return history.push('/')
     return (
-        <div>
-            <h1>Create a new location</h1>
-            <ul>
+        <div className='createNewLocationMasterDiv'>
+            <h1 className='createNewLocationHeader'>Create a New Location</h1>
+            <ul className='createNewLocationUl'>
                 {valErrors.map((err, i) => (
-                    <li key={i}>{err}</li>
+                    <li key={i} className='createNewLocationLi'>{err}</li>
                 ))}
             </ul>
-            <form onSubmit={formSubmit}>
-                <label>Name: </label>
-                <input type='text' name='name' onChange={(e) => setName(e.target.value)} value={name} required='required'></input>
+            <form onSubmit={formSubmit} className='createNewLocationForm'>
+                <label className='createNewLocationLabel' >Name: </label>
+                <input className='createNewLocationInput' type='text' name='name' onChange={(e) => setName(e.target.value)} value={name} required='required'></input>
 
-                <label>Address: </label>
-                <input type='text' name='address' onChange={(e) => setAddress(e.target.value)} value={address} required='required'></input>
+                <label className='createNewLocationLabel'>Address: </label>
+                <input className='createNewLocationInput' type='text' name='address' onChange={(e) => setAddress(e.target.value)} value={address} required='required'></input>
 
-                <label>City: </label>
-                <input type='text' name='city' onChange={(e) => setCity(e.target.value)} value={city} required='required'></input>
+                <label className='createNewLocationLabel'>City: </label>
+                <input className='createNewLocationInput' type='text' name='city' onChange={(e) => setCity(e.target.value)} value={city} required='required'></input>
 
-                <label>Country: </label>
-                <input type='text' name='country' onChange={(e) => setCountry(e.target.value)} value={country} required='required'></input>
+                <label className='createNewLocationLabel'>Country: </label>
+                <input className='createNewLocationInput' type='text' name='country' onChange={(e) => setCountry(e.target.value)} value={country} required='required'></input>
 
-                <label>Price: </label>
-                <input type='text' name='price' onChange={(e) => setPrice(e.target.value)} value={price} required='required'></input>
+                <label className='createNewLocationLabel'>Price: </label>
+                <input className='createNewLocationInput' type='text' name='price' onChange={(e) => setPrice(e.target.value)} value={price} required='required'></input>
 
-                <button type='submit' disabled={!!valErrors.length}>Submit Form</button>
+                <button className='createNewLocationButton' type='submit' disabled={!!valErrors.length}>Submit Form</button>
             </form>
         </div>
     )

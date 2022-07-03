@@ -64,7 +64,7 @@
     margin-right: 30px;
 }
 .inactiveButton{
-    color: black;
+    border: 2px solid #DDDDDD;
     height: 50px;
     width: 50px;
     border-radius: 50px;
@@ -72,14 +72,14 @@
 }
 .activeButton {
 
-    color: black;
+    border: 2px solid #DDDDDD;
     height: 50px;
     width: 50px;
     border-radius: 60px;
 }
 
 .demoUserButton {
-    color: black;
+    border: 2px solid #DDDDDD;
     margin-top: 4%;
     margin-right: 3%;
     font-weight: bold;
@@ -102,4 +102,5 @@
 }
 .profile-dropdownStyleButton {
     border-radius: 5px;
+    border: 2px solid #DDDDDD;
 }
