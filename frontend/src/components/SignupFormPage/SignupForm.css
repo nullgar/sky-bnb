@@ -1,0 +1,51 @@
+.signupForm {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+
+}
+
+.signupLi{
+    display: flex;
+
+    flex-flow: column;
+    list-style: none;
+}
+
+.signupUl {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: red;
+    margin: 1% 0;
+}
+
+.signupLabel {
+    display: inline-flex;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 2%;
+    color: black;
+}
+
+.signupInput {
+    left: 20px;
+    padding: 1%;
+    width: 50%;
+    border-radius: 20px;
+    border: 2px solid #DDDDDD;
+    margin-bottom: 4%;
+}
+
+.signupButton {
+    display: flex;
+    font-size: larger;
+    justify-content: center;
+    align-items: center;
+    width: 32vw;
+    /* height: 6vh; */
+    border-radius: 20px;
+    border: 2px solid #DDDDDD;
+    margin-bottom: 3%;
+
+}

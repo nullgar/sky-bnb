@@ -1,0 +1,24 @@
+.footer {
+    display: flex;
+    background-color: #fff;
+    /* height: 10%; */
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: rgb(0 0 0 / 8%) 0 -1px 0;
+    position: sticky;
+    position: 0;
+    top: 0;
+    width: 100%;
+}
+
+.devFooter {
+    background-color: red;
+}
+
+.techFooter {
+    background-color: aqua;
+}
+
+.devLinks {
+    background-color: bisque;
+}

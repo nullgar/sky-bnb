@@ -86,9 +86,9 @@ const EditLocation = ({hideForm}) => {
     } else if (Object.values(location)) {
         return (
         <div className='hideEditLocation' id='hideEditLocation'>
-            <ul>
+            <ul className='editLocationUl'>
                 {valErrors.map((err, i)=> (
-                    <li key={i}>{err}</li>
+                    <li key={i} className='editLocationLi'>{err}</li>
                 ))}
             </ul>
             <form className='showEditLocation'>

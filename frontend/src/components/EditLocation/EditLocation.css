@@ -41,3 +41,16 @@
     border: 2px solid #DDDDDD;
     margin-bottom: 3%;
 }
+.editLocationUl {
+    display: flex;
+    flex-flow: column;
+    list-style: none;
+}
+
+.editLocationLi {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: red;
+    margin: 1% 0;
+}

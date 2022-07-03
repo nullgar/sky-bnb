@@ -25,7 +25,8 @@ function Location({hideForm}) {
 
   useEffect(() => {
     dispatch(getLocations())
-  }, [dispatch])
+  }, [dispatch]);
+
 
   const backupInfo = useLocation();
   const backup = parseInt(backupInfo.pathname.split('/')[2])

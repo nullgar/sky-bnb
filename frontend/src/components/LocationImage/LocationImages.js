@@ -12,7 +12,7 @@ const LocationImages = () => {
     const dispatch = useDispatch();
     const backupInfo = useLocation();
     const backup = parseInt(backupInfo.pathname.split('/')[2])
-
+    const [isLoaded, setIsLoaded] = useState(false)
     const images = useSelector(state => {
         return state.images;
     })
@@ -22,28 +22,36 @@ const LocationImages = () => {
     const location = useSelector(state => {
         return state.location[backup]
     });
-
     useEffect(() => {
         dispatch(getImages(backup));
+        setIsLoaded(true)
         dispatch(getLocations());
     }, [dispatch])
 
 
-    if(images)
+    if(Object.values(images).length > 0 && isLoaded)
     {
+        console.log(images)
     return (
         <div>
 
             {Object.values(images).map(image => (
                 <div key={image.id + 7}>
+
                     <img src={image.url} className='locationImages' />
+
                 </div>
             ))}
             {user && user.id === location.userId ? <CreateNewLocationImage /> : null}
         </div>
     )
     } else {
-        <p> image err </p>
+        return (
+            <div>
+                <img src={'https://downtownls.org/wp-content/uploads/coming-soon.jpg'} className='locationImages' />
+                {user && user.id === location.userId ? <CreateNewLocationImage /> : null}
+            </div>
+        )
     }
 }
 

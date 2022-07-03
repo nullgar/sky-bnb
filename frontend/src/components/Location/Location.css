@@ -22,17 +22,17 @@
 .locationEditButton {
     color: black;
     margin: 2% 0 2% 0;
-    width: 7vw;
-    height: 5vh;
-    /* margin-left: 5%; */
+    width: 125px;
+    height: 50px;
     border-radius: 20px;
     border: 2px solid #DDDDDD;
 }
 .locationEditDelete {
-    color: black;
+    font-size: 13px;
+    color: red;
     margin: 2% 0 2% 0;
-    width: 7vw;
-    height: 5vh;
+    width: 125px;
+    height: 50px;
     /* margin-left: 5%; */
     border-radius: 20px;
     border: 2px solid #DDDDDD;

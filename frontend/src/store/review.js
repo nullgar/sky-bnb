@@ -32,8 +32,8 @@ export const getReviews = (locationId) => async dispatch => {
 };
 
 export const createReview = (data) =>async dispatch => {
-
-    const res = await csrfFetch(`/api/reviews/`, {
+    const {locationId} = data;
+    const res = await csrfFetch(`/api/reviews/${locationId}`, {
         method: "POST",
         header: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
@@ -79,6 +79,7 @@ const reviewReducer = (state = [], action) => {
                         ...state,
                         [action.review.id]: action.review
                     };
+                    console.log(newState)
                     return newState
                 }
                 return {

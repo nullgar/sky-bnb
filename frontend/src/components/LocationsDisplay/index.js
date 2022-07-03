@@ -29,11 +29,10 @@ function LocationsDisplay() {
 
           // this fixed the re render issue but why
             <div key={location.id + 7} className='mainPageDisplayDivs'>
-              {console.log(location.id)}
                 <h1 className='mainPageDisplayHeader' >
                     <Link to={`/location/${location.id}`} className='mainPageDisplayLink'> {location.name} </Link>
                 </h1>
-                { location.Images[0] ? <Link to={`/location/${location.id}`} ><img src={location.Images[0].url}  className='mainPageDisplayDivsImage' /> </Link> : null}
+                { location.Images[0] ? <Link to={`/location/${location.id}`} > <img src={location.Images[0].url}  className='mainPageDisplayDivsImage' /> </Link> : <Link to={`/location/${location.id}`} > <img src={'https://downtownls.org/wp-content/uploads/coming-soon.jpg'}  className='mainPageDisplayDivsImage' /> </Link>}
                 <p className='mainPageDisplayInfo'>
                     {location.city}, {location.country}
                 </p>

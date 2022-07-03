@@ -48,7 +48,7 @@ const CreateNewLocationImage = () => {
     if(images !== undefined)
     {
     return (
-        <div>
+        <div className='createNewImageDiv'>
             <ul className='newImageUl'>
                 {valErrors.map(err => (
                     <li key={err} className='newImageLi'>{err}</li>
