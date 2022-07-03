@@ -6,18 +6,20 @@ function Footer() {
 
   return (
     <div className='footer'>
-        {/* <div className='devFooter'>
+        <div className='devFooter'>
             <p>Developed by Jonatan Aguilar</p>
         </div>
         <div className='techFooter'>
-            <p>Technologies Used</p>
-            <p>test</p>
+            <ul className='footerUl' >Technologies Used
+                <li className='footerLi' >React</li>
+                <li className='footerLi' >Redux</li>
+                <li className='footerLi' >PostgreSQL</li>
+                <li className='footerLi' >NodeJs</li>
+            </ul>
         </div>
         <div className='devLinks'>
-            <p>Links</p>
-            <p>Links</p>
-            <p>Links</p>
-        </div> */}
+            <a className='footerLink' href='https://github.com/nullgar/sky-bnb'>Github</a>
+        </div>
 
     </div>
   );

@@ -12,13 +12,40 @@
 }
 
 .devFooter {
-    background-color: red;
+    position: relative;
+    right: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .techFooter {
-    background-color: aqua;
+    position: relative;
+    right: 100px;
+    margin-bottom: 20px;
 }
 
 .devLinks {
-    background-color: bisque;
+    position: relative;
+    right: 100px;
+    margin-bottom: 20px;
+}
+
+.footerUl {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+
+.footerLi {
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* margin: 1% 0; */
+}
+.footerLink {
+    text-decoration: none;
+    font-style: italic;
+    font-weight: bold;
 }
