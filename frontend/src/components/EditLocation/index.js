@@ -15,6 +15,11 @@ const EditLocation = ({hideForm}) => {
        return state.session.user.id
     });
 
+    useEffect(() => {
+        dispatch(getLocations());
+
+    }, [dispatch, user])
+
     const backupInfo = useLocation();
     const backup = parseInt(backupInfo.pathname.split('/')[2])
     const sessionUser = useSelector(state => state.session.user);
@@ -27,9 +32,7 @@ const EditLocation = ({hideForm}) => {
     const [price, setPrice] = useState(location ? location.price : '');
     const [valErrors, setValErrors] = useState([]);
 
-    useEffect(() => {
-        dispatch(getLocations())
-    }, [dispatch])
+
 
     useEffect(() => {
         const errors = [];
@@ -57,8 +60,6 @@ const EditLocation = ({hideForm}) => {
             price
         }
 
-        let updatedLocation;
-        updatedLocation = parseInt(location.id)
 
 
         const res = await dispatch(updateLocation(data, backup))
@@ -66,7 +67,6 @@ const EditLocation = ({hideForm}) => {
                 const data = await res.json();
                 if (data && data.errors) setValErrors(data.errors);
             });
-        // await dispatch(updateLocation(data, backup));
         if (res) {
 
             let hide = document.querySelector('#hideEditLocation');
@@ -76,7 +76,7 @@ const EditLocation = ({hideForm}) => {
 
             button.innerHTML = 'Edit Location'
         }
-
+        return;
 
     };
 

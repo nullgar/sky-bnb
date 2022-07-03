@@ -104,14 +104,12 @@ const locationReducer = (state = [], action) => {
     const allLocations = {};
     switch (action.type) {
         case GET:
-
+            const listLocation = {}
             action.locations.forEach(location => {
-            state[location.id] = location;
+            listLocation[location.id] = location;
             });
-            return {
-                ...allLocations,
-                ...state
-            };
+            console.log(listLocation);
+            return listLocation;
         case CREATE:
             Object.values(action.location).forEach(location => {
                 state[location.id] = location;
@@ -135,6 +133,7 @@ const locationReducer = (state = [], action) => {
                 }
 
             });
+            console.log(updateState)
             return updateState
 
 

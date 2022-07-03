@@ -24,10 +24,12 @@ function LocationsDisplay() {
     return (
         <>
         {user !== undefined && user !== null ? <Link to='/location/new'>Create New Location</Link> : null}
-        {locations ? locations.map(location => (
+
+        { locations.map(location => (
 
           // this fixed the re render issue but why
             <div key={location.id + 7} className='mainPageDisplayDivs'>
+              {console.log(location.id)}
                 <h1>
                     <Link to={`/location/${location.id}`}> {location.name} </Link>
                 </h1>
@@ -36,7 +38,7 @@ function LocationsDisplay() {
                     {location.city}, {location.country}
                 </p>
             </div>
-        )): null}
+        ))}
         </>
     );
     }

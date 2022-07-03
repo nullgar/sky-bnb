@@ -9,9 +9,10 @@
 
 .mainPageDisplayDivs {
     display: 1;
-    padding: 10%;
+    /* padding: 10%; */
 }
 
 .mainPageDisplayDivsImage {
-    height: 20%;
+    height: 500px;
+
 }
