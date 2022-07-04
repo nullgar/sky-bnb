@@ -7,8 +7,9 @@
     box-shadow: rgb(0 0 0 / 8%) 0 -1px 0;
     position: sticky;
     position: 0;
-    top: 0;
+    /* bottom: 0; */
     width: 100%;
+    /* height: 100px; */
 }
 
 .devFooter {
@@ -16,25 +17,25 @@
     right: 30px;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .techFooter {
     position: relative;
     right: 100px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .devLinks {
     position: relative;
     right: 100px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .footerUl {
     display: flex;
-    flex-flow: column;
-    justify-content: flex-end;
+    flex-direction: column;
+    font-size: x-small;
 }
 
 .footerLi {
@@ -43,6 +44,7 @@
     align-items: center;
     text-align: center;
     /* margin: 1% 0; */
+    font-size: x-small;
 }
 .footerLink {
     text-decoration: none;
