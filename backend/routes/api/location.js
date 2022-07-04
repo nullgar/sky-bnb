@@ -44,7 +44,10 @@ const validateLocation = [
 router.get('/', asyncHandler(async function(req, res) {
     const locations = await Location.findAll({
         include: { model: Image, as: 'Images' }
-    });
+    },
+    );
+
+    console.log(locations)
     return res.json(locations);
 }));
 

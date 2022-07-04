@@ -20,6 +20,22 @@ module.exports = {
      {
       locationId: 1,
       url: 'https://static1.srcdn.com/wordpress/wp-content/uploads/2021/07/Skyrim-The-Chill-Secret-Location.jpg'
+     },
+     {
+      locationId: 4,
+      url: 'https://images.uesp.net/6/63/SR-place-The_Frozen_Hearth.jpg'
+     },
+     {
+      locationId: 5,
+      url: 'https://images.uesp.net/2/27/SR-place-Frostfruit_Inn.jpg'
+     },
+     {
+      locationId: 6,
+      url: 'https://images.uesp.net/thumb/7/72/SR-place-The_Retching_Netch.jpg/1600px-SR-place-The_Retching_Netch.jpg'
+     },
+     {
+      locationId: 7,
+      url: 'https://images.uesp.net/9/9f/SR-place-The_Bee_and_Barb.jpg'
      }
   ], {});
   },
