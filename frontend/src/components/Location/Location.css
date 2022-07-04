@@ -37,3 +37,8 @@
     border-radius: 20px;
     border: 2px solid #DDDDDD;
 }
+.locationImages {
+    height: 350px;
+    width: 450px;
+    border-radius: 10px;
+}

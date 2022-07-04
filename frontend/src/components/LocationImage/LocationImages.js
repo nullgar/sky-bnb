@@ -31,17 +31,17 @@ const LocationImages = () => {
 
     if(Object.values(images).length > 0 && isLoaded)
     {
-        console.log(images)
+
     return (
         <div>
 
-            {Object.values(images).map(image => (
+            {/* {Object.values(images).map(image => (
                 <div key={image.id + 7}>
 
                     <img src={image.url} className='locationImages' />
 
                 </div>
-            ))}
+            ))} */}
             {user && user.id === location.userId ? <CreateNewLocationImage /> : null}
         </div>
     )

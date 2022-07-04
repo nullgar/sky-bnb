@@ -65,7 +65,10 @@ function Location({hideForm}) {
       return(
       <div className='locationMasterDiv'>
         <h1 className='locationHeader'>{location.name}</h1>
+        {console.log(location.Images[0].url)}
+        {location.Images[0].url ? <img src={location.Images[0].url} className='locationImages' /> : <img src={'https://downtownls.org/wp-content/uploads/coming-soon.jpg'} className='locationImages' />}
         <LocationImages />
+
         <p className='locationInfo'>Located at {location.address}</p>
         <p className='locationInfo'>{location.city}, {location.country}</p>
         <p className='locationInfo'>Cost per night ${location.price}</p>

@@ -52,7 +52,7 @@ router.get('/', asyncHandler(async function(req, res) {
 router.get(/^\/\d+/, asyncHandler(async function(req, res) {
     const id = req.path.slice(1)
 
-    const locationId = await Location.findByPk(parseInt(id));
+    const locationId = await Location.findByPk(parseInt(id), {include: { model: Image, as: 'Images' }});
     return res.json(locationId);
 }));
 
