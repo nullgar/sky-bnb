@@ -66,6 +66,7 @@ function Location({hideForm}) {
       <div className='locationMasterDiv'>
         <h1 className='locationHeader'>{location.name}</h1>
         <LocationImages />
+
         <p className='locationInfo'>Located at {location.address}</p>
         <p className='locationInfo'>{location.city}, {location.country}</p>
         <p className='locationInfo'>Cost per night ${location.price}</p>

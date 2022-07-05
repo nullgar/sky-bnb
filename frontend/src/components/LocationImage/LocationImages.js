@@ -31,7 +31,7 @@ const LocationImages = () => {
 
     if(Object.values(images).length > 0 && isLoaded)
     {
-        console.log(images)
+
     return (
         <div>
 

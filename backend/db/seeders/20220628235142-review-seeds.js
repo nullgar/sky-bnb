@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       userId: 3,
-      locationId: 2,
+      locationId: 1,
       review: "My legs froze 10/10 would recommend!",
      },
     {

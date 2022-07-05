@@ -34,6 +34,26 @@ module.exports = {
         username: 'nullgar',
         hashedPassword: bcrypt.hashSync('testing@1')
       },
+      {
+        email: 'Haran@skybnb.com',
+        username: 'Haran',
+        hashedPassword: bcrypt.hashSync('testing@2')
+      },
+      {
+        email: 'Mralki@skybnb.com',
+        username: 'Mralki',
+        hashedPassword: bcrypt.hashSync('testing@3')
+      },
+      {
+        email: 'geldis@skybnb.com',
+        username: 'Geldis Sadri',
+        hashedPassword: bcrypt.hashSync('testing@4')
+      },
+      {
+        email: 'keerava@skybnb.com',
+        username: 'Keerava',
+        hashedPassword: bcrypt.hashSync('testing@5')
+      },
 
     ], {});
   },

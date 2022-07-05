@@ -79,7 +79,7 @@ const reviewReducer = (state = [], action) => {
                         ...state,
                         [action.review.id]: action.review
                     };
-                    console.log(newState)
+
                     return newState
                 }
                 return {

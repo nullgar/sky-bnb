@@ -15,6 +15,7 @@ function Footer() {
                 <li className='footerLi' >Redux</li>
                 <li className='footerLi' >PostgreSQL</li>
                 <li className='footerLi' >NodeJs</li>
+                <li className='footerLi' >Express</li>
             </ul>
         </div>
         <div className='devLinks'>
