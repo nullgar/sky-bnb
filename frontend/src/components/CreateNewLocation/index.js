@@ -93,10 +93,6 @@ function CreateNewLocation() {
                 <label className='createNewLocationLabel'>Price: </label>
                 <input className='createNewLocationInput' type='text' name='price' onChange={(e) => setPrice(e.target.value)} value={price} required='required'></input>
 
-                <input type='text' className='newImageInput' value={image} onChange={(e) => setImage(e.target.value)} placeholder='Please Enter Image Url'></input>
-                {/* <button className='newImageButton' onClick={addLocationImage} disabled={!!valErrors.length} >Add Image</button> */}
-
-                {/* <CreateNewLocationImage /> */}
 
                 <button className='createNewLocationButton' type='submit' disabled={!!valErrors.length}>Submit Form</button>
             </form>

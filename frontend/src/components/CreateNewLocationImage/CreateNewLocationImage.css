@@ -19,7 +19,7 @@
     margin: 5% 0 5% 5%;
     margin-left: 1%;
     overflow: scroll;
-
+    border-radius: 10px;
 }
 
 .newImageButton {
