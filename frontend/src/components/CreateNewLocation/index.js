@@ -48,23 +48,8 @@ function CreateNewLocation() {
                 if (data && data.errors) setValErrors(data.errors);
         });
 
-        let locationId = res;
-
-        const addLocationImage = async () => {
-
-            const data = {
-                locationId,
-                url: image
-            };
 
 
-            const res = await dispatch(createImage(data, locationId))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setValErrors(data.errors);
-            });
-        }
-        addLocationImage();
         if (res) history.push(`/`)
     };
 
