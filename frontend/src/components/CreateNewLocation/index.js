@@ -51,7 +51,6 @@ function CreateNewLocation() {
         let locationId = res;
 
         const addLocationImage = async () => {
-            console.log(locationId)
 
             const data = {
                 locationId,

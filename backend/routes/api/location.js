@@ -47,7 +47,6 @@ router.get('/', asyncHandler(async function(req, res) {
     },
     );
 
-    console.log(locations)
     return res.json(locations);
 }));
 
