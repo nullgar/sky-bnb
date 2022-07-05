@@ -1,7 +1,7 @@
 .mainIdexPageMasterDiv {
 
     display: flex;
-    flex-flow: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     height: 100%;
