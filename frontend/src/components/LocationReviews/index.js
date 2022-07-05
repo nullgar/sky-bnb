@@ -49,13 +49,17 @@ const LocationReviews = () => {
 
     } else {
         return (
-            <div>
-            Reviews Go Here
+            <div className='locationReviewsMasterDiv'>
+            <h3 className='locationReviewsHeader'>Reviews</h3>
             {reviews.map(review => (
-                <div key={review.id}>
-                    <p>{review.review}</p>
+                <div key={review.id + 20}>
+                    <div key={review.id + 20} className='locationReviewDiv'>
+                        {review.User && review.User.username !== undefined ? <p className='locationReviewsUser'>{review.User.username}: </p> : null}
+                        <p className='locationReviewsReview' >{review.review}</p>
+                    </div>
                 </div>
             ))}
+
         </div>
         )
     }
