@@ -125,16 +125,13 @@ const locationReducer = (state = [], action) => {
             return newState;
         case UPDATE:
 
-            const updateState = {...state}
-
-            Object.values(updateState).forEach(review => {
-                if (review.id === action.location.id) {
-                    updateState[action.location.id] = action.location.location
-                }
-
+            const updatedLocation = {}
+            action.location.forEach(location => {
+                updatedLocation[location.id] = location;
             });
 
-            return updateState
+            return updatedLocation;
+
 
 
         default:

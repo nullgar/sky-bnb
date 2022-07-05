@@ -75,9 +75,13 @@ router.put(
     asyncHandler( async (req, res) => {
         const id = parseInt(req.params.id);
         const location = req.body;
-        const updatedLocation = await Location.update({...location}, { where: { id: id } });
+        const updatedLocation = await Location.update(location, { where: { id: id } });
+        const locations = await Location.findAll({
+            include: { model: Image, as: 'Images' }
+        }
+        );
 
-        res.json('Success');
+        return res.json(locations);
     })
 )
 
