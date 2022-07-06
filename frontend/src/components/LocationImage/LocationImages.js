@@ -33,7 +33,8 @@ const LocationImages = () => {
     {
 
     return (
-        <div>
+        <>
+        <div className='locationImagesDivMaster'>
 
             {Object.values(images).map(image => (
                 <div key={image.id + 7}>
@@ -42,8 +43,9 @@ const LocationImages = () => {
 
                 </div>
             ))}
-            {user && user.id === location.userId ? <CreateNewLocationImage /> : null}
         </div>
+            {user && user.id === location.userId ? <CreateNewLocationImage /> : null}
+        </>
     )
     } else {
         return (

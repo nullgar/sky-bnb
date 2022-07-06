@@ -1,5 +1,12 @@
 .locationImages {
+    padding: 10px;
     height: 350px;
     width: 450px;
     border-radius: 10px;
+}
+.locationImagesDivMaster {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

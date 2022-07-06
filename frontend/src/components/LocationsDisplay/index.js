@@ -8,22 +8,19 @@ function LocationsDisplay() {
   const locations = useSelector(state => {
     return Object.values(state.location)
   });
-  const user = useSelector(state => {
-    return state.session.user
-  })
+
 
 
   useEffect(() => {
     dispatch(getLocations());
 
-  }, [dispatch, user])
+  }, [dispatch])
 
     if(!locations) {
       <h1>Nothing Loaded</h1>
     } else {
     return (
         <>
-        {user !== undefined && user !== null ? <Link to='/location/new' className='mainPageDisplayCreateButton' >Become a Host</Link> : null}
 
         { locations.map(location => (
 
